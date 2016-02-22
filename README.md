@@ -1,3 +1,14 @@
 # DonutTab
 
-Chrome extension for new tab
+Chrome extension for new tab Based on ES6, React, Webpack
+
+### Development
+
+	npm install // 安装依赖
+
+	npm run build // 编译
+
+	npm run dev // 调试 http://localhost:8080/
+
+
+
