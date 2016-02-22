@@ -1,2 +1,3 @@
-# FreshTab
-chrome extension for new tab
+# DonutTab
+
+Chrome extension for new tab
