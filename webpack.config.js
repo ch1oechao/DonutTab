@@ -10,8 +10,11 @@ var config = {
             test: /\.jsx?$/,
             loaders: ['babel']
         }, {
-            test: /\.scss$/,
+            test: /\.scss?$/,
             loader: 'style!css!sass'
+        }, {
+            test: /\.css?$/,
+            loader: 'style!css'
         }]
     }
 };

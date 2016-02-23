@@ -1,0 +1,21 @@
+.searchbox-container {
+    position: relative;
+    width: 100%;
+    height: 42%;
+}
+
+.searchbox-content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+}
+
+.searchbox-input {
+    width: 80%;
+    margin-right: 10px;
+    float: left;
+    color: #000;
+}
+ 
