@@ -11,6 +11,15 @@ export default class Clock extends React.Component {
         };
     }
 
+    componentDidMount() {
+        var self = this;
+
+        setInterval(function(){
+            self.setState({curTime: self._getCurTime()})
+        }, 1000 / 60);
+
+    }
+
     _getCurTime() {
         var self = this,
             curTime = new Date(),
@@ -19,14 +28,10 @@ export default class Clock extends React.Component {
             secs = this._convertTime(curTime.getSeconds());
 
         return [hour, mins, secs].join(" : ");
-
-        setTimeout(function() {
-            self._getCurTime();
-        }, 1000);
     }
 
     _convertTime(time) {
-        return time > 10 ? time : '0' + time;
+        return time >= 10 ? time : '0' + time;
     }
 
     render() {

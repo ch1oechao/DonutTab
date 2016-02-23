@@ -60,7 +60,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(171);
+	__webpack_require__(178);
 
 	(function main() {
 	  $.material.init();
@@ -19745,9 +19745,13 @@
 
 	var _Bookmark2 = _interopRequireDefault(_Bookmark);
 
-	var _Tools = __webpack_require__(166);
+	var _Tools = __webpack_require__(168);
 
 	var _Tools2 = _interopRequireDefault(_Tools);
+
+	var _Clock = __webpack_require__(173);
+
+	var _Clock2 = _interopRequireDefault(_Clock);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19757,7 +19761,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(169);
+	__webpack_require__(176);
 
 	var Tab = function (_React$Component) {
 	    _inherits(Tab, _React$Component);
@@ -19775,6 +19779,7 @@
 	                'div',
 	                { className: 'donut-tab-container' },
 	                _react2.default.createElement(_SearchBox2.default, null),
+	                _react2.default.createElement(_Clock2.default, null),
 	                _react2.default.createElement(_Bookmark2.default, null),
 	                _react2.default.createElement(_Tools2.default, null)
 	            );
@@ -19839,9 +19844,9 @@
 	                            _react2.default.createElement(
 	                                'label',
 	                                { className: 'control-label', htmlFor: 'focusedInput' },
-	                                'what are u looking for ?'
+	                                'Google'
 	                            ),
-	                            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'focusedInput' })
+	                            _react2.default.createElement('input', { type: 'text', value: '', className: 'form-control', id: 'focusedInput' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'span',
@@ -19898,7 +19903,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 30%; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 65%;\n  float: left; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 42%; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 80%;\n  margin-right: 10px;\n  float: left;\n  color: #000; }\n", ""]);
 
 	// exports
 
@@ -20216,7 +20221,7 @@
 /* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -20236,6 +20241,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	__webpack_require__(166);
+
 	var Bookmark = function (_React$Component) {
 	    _inherits(Bookmark, _React$Component);
 
@@ -20246,12 +20253,12 @@
 	    }
 
 	    _createClass(Bookmark, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'This is Bookmark'
+	                "div",
+	                { className: "bookmark-container" },
+	                "this is bookmark"
 	            );
 	        }
 	    }]);
@@ -20263,6 +20270,46 @@
 
 /***/ },
 /* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(167);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(164)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Bookmark.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Bookmark.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(163)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  top: 30px;\n  left: 30px; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20277,11 +20324,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Calendar = __webpack_require__(167);
+	var _Calendar = __webpack_require__(169);
 
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
-	var _Weather = __webpack_require__(168);
+	var _Weather = __webpack_require__(170);
 
 	var _Weather2 = _interopRequireDefault(_Weather);
 
@@ -20292,6 +20339,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(171);
 
 	var Tools = function (_React$Component) {
 		_inherits(Tools, _React$Component);
@@ -20307,7 +20356,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'tools-container' },
 					'this is Tools',
 					_react2.default.createElement(_Calendar2.default, null),
 					_react2.default.createElement(_Weather2.default, null)
@@ -20321,7 +20370,7 @@
 	exports.default = Tools;
 
 /***/ },
-/* 167 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20370,7 +20419,7 @@
 	exports.default = Calendar;
 
 /***/ },
-/* 168 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20419,13 +20468,174 @@
 	exports.default = Weather;
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(170);
+	var content = __webpack_require__(172);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(164)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Tools.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Tools.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(163)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  color: #FFF; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(174);
+
+	var Clock = function (_React$Component) {
+	    _inherits(Clock, _React$Component);
+
+	    function Clock(props) {
+	        _classCallCheck(this, Clock);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Clock).call(this, props));
+
+	        _this.state = {
+	            curTime: _this._getCurTime()
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Clock, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var self = this;
+
+	            setTimeout(function () {
+	                self.setState({ curTime: self._getCurTime() });
+	            }, 1000);
+	        }
+	    }, {
+	        key: "_getCurTime",
+	        value: function _getCurTime() {
+	            var self = this,
+	                curTime = new Date(),
+	                hour = curTime.getHours(),
+	                mins = this._convertTime(curTime.getMinutes()),
+	                secs = this._convertTime(curTime.getSeconds());
+
+	            return [hour, mins, secs].join(" : ");
+	        }
+	    }, {
+	        key: "_convertTime",
+	        value: function _convertTime(time) {
+	            return time > 10 ? time : '0' + time;
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "h2",
+	                { className: "clock-container" },
+	                this.state.curTime
+	            );
+	        }
+	    }]);
+
+	    return Clock;
+	}(_react2.default.Component);
+
+	exports.default = Clock;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(175);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(164)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Clock.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Clock.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(163)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".clock-container {\n  width: 100%;\n  margin: 30px auto 0;\n  color: #FFF;\n  text-align: center;\n  text-indent: -1.5em; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(177);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(164)(content, {});
@@ -20445,7 +20655,7 @@
 	}
 
 /***/ },
-/* 170 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(163)();
@@ -20453,19 +20663,19 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  background-color: #FFF;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 171 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(172);
+	var content = __webpack_require__(179);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(164)(content, {});
@@ -20485,7 +20695,7 @@
 	}
 
 /***/ },
-/* 172 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(163)();
