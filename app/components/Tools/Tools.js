@@ -5,13 +5,13 @@ import Weather from '../Weather/Weather.js';
 require("./Tools.scss");
 
 export default class Tools extends React.Component {
-	render() {
-		return (
-			<div className="tools-container">
-				this is Tools
-				<Calendar />
-				<Weather />
-			</div>
-		);
-	}
+    render() {
+        return (
+            <div className="tools-container">
+                this is Tools
+                <Calendar />
+                <Weather />
+            </div>
+        );
+    }
 }
