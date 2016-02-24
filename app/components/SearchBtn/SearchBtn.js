@@ -8,17 +8,14 @@ const DEFAULT_LINK = 'javascript:void(0)';
 
 export default class SearchBtn extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
         this.state = {
             href: DEFAULT_LINK,
             enginesDict: this.getEnginesDict(props.engines),
             curEngine: localStorage.getItem("curEngine") 
                         ? JSON.parse(localStorage.getItem("curEngine")) 
                         : { "brand": "google", "link": "https://www.google.com/search?q=" }
-        };
-        this.context = {
-            router: React.PropTypes.func.isRequired
         };
     }
 
