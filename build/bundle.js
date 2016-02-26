@@ -60,11 +60,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(182);
+	__webpack_require__(179);
 
 	(function main() {
-	  $.material.init();
-	  _reactDom2.default.render(_react2.default.createElement(_Tab2.default, null), document.getElementById('donutTab'));
+	    $.material.init();
+	    _reactDom2.default.render(_react2.default.createElement(_Tab2.default, null), document.getElementById('donutTab'));
 	})();
 
 /***/ },
@@ -19741,15 +19741,15 @@
 
 	var _SearchBox2 = _interopRequireDefault(_SearchBox);
 
-	var _Bookmark = __webpack_require__(169);
+	var _Bookmark = __webpack_require__(166);
 
 	var _Bookmark2 = _interopRequireDefault(_Bookmark);
 
-	var _Tools = __webpack_require__(172);
+	var _Tools = __webpack_require__(169);
 
 	var _Tools2 = _interopRequireDefault(_Tools);
 
-	var _Clock = __webpack_require__(177);
+	var _Clock = __webpack_require__(174);
 
 	var _Clock2 = _interopRequireDefault(_Clock);
 
@@ -19761,7 +19761,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(180);
+	__webpack_require__(177);
 
 	var Tab = function (_React$Component) {
 	    _inherits(Tab, _React$Component);
@@ -19807,9 +19807,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SearchBtn = __webpack_require__(161);
+	var _Dictionary = __webpack_require__(161);
 
-	var _SearchBtn2 = _interopRequireDefault(_SearchBtn);
+	var _Dictionary2 = _interopRequireDefault(_Dictionary);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19819,23 +19819,32 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(167);
+	__webpack_require__(162);
 
-	var searchEngines = [{
-	    "brand": "google",
-	    "link": "https://www.google.com/search?q="
+	var DEFAULT_LINK = 'javascript:void(0)';
+
+	var DEFAULT_ENGINE = {
+	    "brand": "Google",
+	    "action": "https://www.google.com/search",
+	    "name": "q"
+	};
+
+	var searchEngines = [DEFAULT_ENGINE, {
+	    "brand": "Baidu",
+	    "action": "http://www.baidu.com/s",
+	    "name": "wd"
 	}, {
-	    "brand": "baidu",
-	    "link": "http://www.baidu.com/s?wd="
+	    "brand": "GitHub",
+	    "action": "https://github.com/search",
+	    "name": "q"
 	}, {
-	    "brand": "github",
-	    "link": "https://github.com/search?q="
+	    "brand": "知乎",
+	    "action": "https://www.zhihu.com/search",
+	    "name": "q"
 	}, {
-	    "brand": "weibo",
-	    "link": "http://s.weibo.com/weibo/"
-	}, {
-	    "brand": "zhihu",
-	    "link": "https://www.zhihu.com/search?q="
+	    "brand": "bilibili",
+	    "action": "http://search.bilibili.com/all",
+	    "name": "keyword"
 	}];
 
 	var SearchBox = function (_React$Component) {
@@ -19848,20 +19857,64 @@
 
 	        _this.state = {
 	            value: '',
-	            engines: searchEngines
+	            engines: searchEngines,
+	            curEngine: _this._getCurEngine(),
+	            enginesDict: _this._getEnginesDict(searchEngines)
 	        };
 	        return _this;
 	    }
 
 	    _createClass(SearchBox, [{
+	        key: '_getCurEngine',
+	        value: function _getCurEngine() {
+	            var localEngine = JSON.parse(localStorage.getItem('curEngine'));
+	            return localEngine ? localEngine : DEFAULT_ENGINE;
+	        }
+	    }, {
 	        key: 'handleChange',
 	        value: function handleChange(ev) {
 	            this.setState({ value: ev.target.value });
 	        }
 	    }, {
+	        key: 'handleKeyDown',
+	        value: function handleKeyDown(ev) {
+	            if (+ev.keyCode === 13) {
+	                var $form = document.getElementById('searchForm');
+
+	                $form.submit();
+	            }
+	        }
+	    }, {
+	        key: '_getEnginesDict',
+	        value: function _getEnginesDict(engines) {
+	            var enginesDict = new _Dictionary2.default();
+	            engines.map(function (item) {
+	                enginesDict.set(item.brand, item);
+	            });
+	            return enginesDict;
+	        }
+	    }, {
+	        key: 'changeSearchEngine',
+	        value: function changeSearchEngine(event) {
+
+	            var changeEngine = this.state.enginesDict.get(event.target.id);
+
+	            // set state
+	            this.setState({ curEngine: changeEngine });
+
+	            // set localStorage
+	            localStorage.setItem("curEngine", JSON.stringify(changeEngine));
+	        }
+	    }, {
+	        key: '_firstLetterToUpperCase',
+	        value: function _firstLetterToUpperCase(str) {
+	            return str.substring(0, 1).toUpperCase() + str.substring(1);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var value = this.state.value,
+	            var self = this,
+	                value = this.state.value,
 	                engines = this.state.engines,
 	                curEngine = this.state.curEngine;
 
@@ -19872,14 +19925,42 @@
 	                    'div',
 	                    { className: 'searchbox-content' },
 	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-group  label-floating' },
+	                        'form',
+	                        { className: 'form-group  label-floating', name: 'searchForm', id: 'searchForm', action: curEngine.action },
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'searchbox-input' },
-	                            _react2.default.createElement('input', { type: 'text', value: value, className: 'form-control', onChange: this.handleChange.bind(this) })
+	                            _react2.default.createElement('input', { type: 'text', value: value, name: curEngine.name, className: 'form-control',
+	                                autoComplete: 'off',
+	                                onChange: this.handleChange.bind(this),
+	                                onKeyDown: this.handleKeyDown.bind(this) })
 	                        ),
-	                        _react2.default.createElement(_SearchBtn2.default, { engines: engines, inputval: value })
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'btn-group search-btn-container' },
+	                            _react2.default.createElement('input', { type: 'submit', className: 'btn btn-primary search-btn', value: this._firstLetterToUpperCase(curEngine.brand) }),
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: DEFAULT_LINK, 'data-target': '#', className: 'btn dropdown-toggle btn-primary', 'data-toggle': 'dropdown' },
+	                                _react2.default.createElement('span', { className: 'caret' })
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'dropdown-menu' },
+	                                engines.map(function (item) {
+	                                    var brand = self._firstLetterToUpperCase(item.brand);
+	                                    return _react2.default.createElement(
+	                                        'li',
+	                                        { key: item.brand },
+	                                        _react2.default.createElement(
+	                                            'a',
+	                                            { href: DEFAULT_LINK, id: item.brand, onClick: self.changeSearchEngine.bind(self) },
+	                                            brand
+	                                        )
+	                                    );
+	                                })
+	                            )
+	                        )
 	                    )
 	                )
 	            );
@@ -19893,142 +19974,6 @@
 
 /***/ },
 /* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _Dictionary = __webpack_require__(162);
-
-	var _Dictionary2 = _interopRequireDefault(_Dictionary);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	__webpack_require__(163);
-
-	var SearchBtn = function (_React$Component) {
-		_inherits(SearchBtn, _React$Component);
-
-		function SearchBtn(props, context) {
-			_classCallCheck(this, SearchBtn);
-
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchBtn).call(this, props, context));
-
-			_this.state = {
-				href: 'javascript:void(0)',
-				enginesDict: _this.getEnginesDict(props.engines),
-				curEngine: localStorage.getItem("curEngine") ? JSON.parse(localStorage.getItem("curEngine")) : { "brand": "google", "link": "https://www.google.com/search?q=" }
-			};
-			_this.context = {
-				router: _react2.default.PropTypes.func.isRequired
-			};
-			return _this;
-		}
-
-		_createClass(SearchBtn, [{
-			key: 'getEnginesDict',
-			value: function getEnginesDict(engines) {
-				var enginesDict = new _Dictionary2.default();
-				engines.map(function (item) {
-					enginesDict.set(item.brand, item.link);
-				});
-				return enginesDict;
-			}
-		}, {
-			key: 'startToSearch',
-			value: function startToSearch(event) {
-				var link = this.state.curEngine.link + this.props.inputval;
-				this.setState({
-					href: link
-				});
-			}
-		}, {
-			key: 'changeSearchEngine',
-			value: function changeSearchEngine(event) {
-				// set state
-				this.setState({
-					curEngine: {
-						"brand": event.target.id,
-						"link": this.state.enginesDict.get(event.target.id)
-					}
-				});
-
-				// click to search
-				this.startToSearch(event);
-
-				// set localStorage
-				localStorage.setItem("curEngine", JSON.stringify({
-					"brand": event.target.id,
-					"link": this.state.enginesDict.get(event.target.id)
-				}));
-			}
-		}, {
-			key: '_firstWordToUpperCase',
-			value: function _firstWordToUpperCase(str) {
-				return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var self = this,
-				    engines = this.props.engines,
-				    curEngine = this.state.curEngine;
-
-				return _react2.default.createElement(
-					'div',
-					{ className: 'btn-group search-btn' },
-					_react2.default.createElement(
-						'a',
-						{ href: self.state.href, id: curEngine.brand, className: 'btn btn-primary', onClick: self.startToSearch.bind(self) },
-						curEngine.brand
-					),
-					_react2.default.createElement(
-						'a',
-						{ href: 'javascript:void(0)', 'data-target': '#', className: 'btn dropdown-toggle btn-primary', 'data-toggle': 'dropdown' },
-						_react2.default.createElement('span', { className: 'caret' })
-					),
-					_react2.default.createElement(
-						'ul',
-						{ className: 'dropdown-menu' },
-						engines.map(function (item) {
-							var brand = self._firstWordToUpperCase(item.brand);
-							return _react2.default.createElement(
-								'li',
-								{ key: item.brand },
-								_react2.default.createElement(
-									'a',
-									{ href: 'javascript:void(0)', id: item.brand, onClick: self.changeSearchEngine.bind(self) },
-									brand
-								)
-							);
-						})
-					)
-				);
-			}
-		}]);
-
-		return SearchBtn;
-	}(_react2.default.Component);
-
-	exports.default = SearchBtn;
-
-/***/ },
-/* 162 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20103,23 +20048,23 @@
 	exports.default = Dictionary;
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(164);
+	var content = __webpack_require__(163);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
+	var update = __webpack_require__(165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./SearchBtn.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./SearchBtn.scss");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./SearchBox.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./SearchBox.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -20129,21 +20074,21 @@
 	}
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(165)();
+	exports = module.exports = __webpack_require__(164)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".search-btn .dropdown-menu li {\n  text-indent: .75em;\n  letter-spacing: .1em; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 45%; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20198,7 +20143,7 @@
 	};
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -20452,47 +20397,7 @@
 
 
 /***/ },
-/* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(168);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./SearchBox.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./SearchBox.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(165)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 42%; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 169 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20515,7 +20420,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(170);
+	__webpack_require__(167);
 
 	var Bookmark = function (_React$Component) {
 	    _inherits(Bookmark, _React$Component);
@@ -20543,16 +20448,16 @@
 	exports.default = Bookmark;
 
 /***/ },
-/* 170 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(171);
+	var content = __webpack_require__(168);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
+	var update = __webpack_require__(165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20569,10 +20474,10 @@
 	}
 
 /***/ },
-/* 171 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(165)();
+	exports = module.exports = __webpack_require__(164)();
 	// imports
 
 
@@ -20583,13 +20488,13 @@
 
 
 /***/ },
-/* 172 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20598,11 +20503,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Calendar = __webpack_require__(173);
+	var _Calendar = __webpack_require__(170);
 
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
-	var _Weather = __webpack_require__(174);
+	var _Weather = __webpack_require__(171);
 
 	var _Weather2 = _interopRequireDefault(_Weather);
 
@@ -20614,37 +20519,37 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(175);
+	__webpack_require__(172);
 
 	var Tools = function (_React$Component) {
-		_inherits(Tools, _React$Component);
+	    _inherits(Tools, _React$Component);
 
-		function Tools() {
-			_classCallCheck(this, Tools);
+	    function Tools() {
+	        _classCallCheck(this, Tools);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).apply(this, arguments));
-		}
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).apply(this, arguments));
+	    }
 
-		_createClass(Tools, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'tools-container' },
-					'this is Tools',
-					_react2.default.createElement(_Calendar2.default, null),
-					_react2.default.createElement(_Weather2.default, null)
-				);
-			}
-		}]);
+	    _createClass(Tools, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'tools-container' },
+	                'this is Tools',
+	                _react2.default.createElement(_Calendar2.default, null),
+	                _react2.default.createElement(_Weather2.default, null)
+	            );
+	        }
+	    }]);
 
-		return Tools;
+	    return Tools;
 	}(_react2.default.Component);
 
 	exports.default = Tools;
 
 /***/ },
-/* 173 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20693,13 +20598,13 @@
 	exports.default = Calendar;
 
 /***/ },
-/* 174 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20717,41 +20622,41 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Weather = function (_React$Component) {
-		_inherits(Weather, _React$Component);
+	    _inherits(Weather, _React$Component);
 
-		function Weather() {
-			_classCallCheck(this, Weather);
+	    function Weather() {
+	        _classCallCheck(this, Weather);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Weather).apply(this, arguments));
-		}
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Weather).apply(this, arguments));
+	    }
 
-		_createClass(Weather, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					' this is Weather '
-				);
-			}
-		}]);
+	    _createClass(Weather, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                ' this is Weather '
+	            );
+	        }
+	    }]);
 
-		return Weather;
+	    return Weather;
 	}(_react2.default.Component);
 
 	exports.default = Weather;
 
 /***/ },
-/* 175 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(176);
+	var content = __webpack_require__(173);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
+	var update = __webpack_require__(165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20768,10 +20673,10 @@
 	}
 
 /***/ },
-/* 176 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(165)();
+	exports = module.exports = __webpack_require__(164)();
 	// imports
 
 
@@ -20782,7 +20687,7 @@
 
 
 /***/ },
-/* 177 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20805,7 +20710,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(178);
+	__webpack_require__(175);
 
 	var Clock = function (_React$Component) {
 	    _inherits(Clock, _React$Component);
@@ -20850,9 +20755,23 @@
 	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "h2",
+	                "div",
 	                { className: "clock-container" },
-	                this.state.curTime
+	                _react2.default.createElement(
+	                    "span",
+	                    { className: "clock-text" },
+	                    "It's "
+	                ),
+	                _react2.default.createElement(
+	                    "h2",
+	                    { className: "clock-time" },
+	                    this.state.curTime
+	                ),
+	                _react2.default.createElement(
+	                    "span",
+	                    { className: "clock-text" },
+	                    " Let's start to make something beautiful 😎"
+	                )
 	            );
 	        }
 	    }]);
@@ -20863,16 +20782,16 @@
 	exports.default = Clock;
 
 /***/ },
-/* 178 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(179);
+	var content = __webpack_require__(176);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
+	var update = __webpack_require__(165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20889,30 +20808,30 @@
 	}
 
 /***/ },
-/* 179 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(165)();
+	exports = module.exports = __webpack_require__(164)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".clock-container {\n  width: 100%;\n  margin: 30px auto 0;\n  text-align: center;\n  text-indent: -1.5em; }\n", ""]);
+	exports.push([module.id, ".clock-container {\n  width: 100%;\n  margin: 30px auto 0;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  margin: 0 10px;\n  font-size: 2.2em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 180 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(181);
+	var content = __webpack_require__(178);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
+	var update = __webpack_require__(165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20929,10 +20848,10 @@
 	}
 
 /***/ },
-/* 181 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(165)();
+	exports = module.exports = __webpack_require__(164)();
 	// imports
 
 
@@ -20943,16 +20862,16 @@
 
 
 /***/ },
-/* 182 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(183);
+	var content = __webpack_require__(180);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(166)(content, {});
+	var update = __webpack_require__(165)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20969,10 +20888,10 @@
 	}
 
 /***/ },
-/* 183 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(165)();
+	exports = module.exports = __webpack_require__(164)();
 	// imports
 
 
