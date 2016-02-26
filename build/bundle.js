@@ -19763,13 +19763,20 @@
 
 	__webpack_require__(177);
 
+	// Thanks for ihuan.me
+	var BING_IMG = 'http://ihuan.me/bing';
+
+	var tabStyle = {
+	    backgroundImage: 'url(' + BING_IMG + ')'
+	};
+
 	var Tab = function (_React$Component) {
 	    _inherits(Tab, _React$Component);
 
-	    function Tab() {
+	    function Tab(props) {
 	        _classCallCheck(this, Tab);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).call(this, props));
 	    }
 
 	    _createClass(Tab, [{
@@ -19777,7 +19784,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'donut-tab-container' },
+	                { className: 'donut-tab-container', style: tabStyle },
 	                _react2.default.createElement(_SearchBox2.default, null),
 	                _react2.default.createElement(_Clock2.default, null),
 	                _react2.default.createElement(_Bookmark2.default, null),
@@ -20621,22 +20628,139 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var WEATHER_API = 'https://api.heweather.com/x3/weather';
+	var CITY_API = 'https://api.heweather.com/x3/citylist';
+	var KEY = 'ac32bea2133a4f849fc136a0ffae65dd';
+
 	var Weather = function (_React$Component) {
 	    _inherits(Weather, _React$Component);
 
-	    function Weather() {
+	    function Weather(props) {
 	        _classCallCheck(this, Weather);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Weather).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Weather).call(this, props));
+
+	        _this.state = {};
+	        return _this;
 	    }
 
 	    _createClass(Weather, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            var defaultCityName = 'beijing',
+	                defaultSearchType = 'allchina';
+
+	            this._getCityWeather(defaultCityName, function (data) {
+
+	                if (!data) return;
+
+	                _this2.setState({
+	                    city: data.city.city,
+	                    curTmp: data.curW.tmp,
+	                    curCondTxt: data.curW.cond.txt,
+	                    tomTempMin: data.tomW.tmp.min,
+	                    tomTempMax: data.tomW.tmp.max,
+	                    tomCondTxt: data.tomW.cond.txt_d
+	                });
+	            });
+	        }
+	    }, {
+	        key: '_getCityWeather',
+	        value: function _getCityWeather(cityName, callback) {
+
+	            $.ajax({
+	                url: WEATHER_API,
+	                data: {
+	                    city: cityName,
+	                    key: KEY
+	                },
+	                success: function success(data) {
+	                    return data;
+	                },
+	                error: function error(err) {
+	                    throw err;
+	                }
+
+	            }).done(function (data) {
+
+	                if (!data) return;
+
+	                var weather = data[Object.keys(data)[0]];
+
+	                weather = Array.isArray(weather) ? weather[0] : function () {
+	                    return;
+	                }();
+
+	                var cityInfo = weather.basic ? weather.basic : null,
+	                    curWeather = weather.now ? weather.now : null,
+	                    tomorrowWeather = Array.isArray(weather.daily_forecast) ? weather.daily_forecast[0] : null;
+
+	                if (cityInfo && curWeather && tomorrowWeather) {
+
+	                    var filterData = {
+	                        city: cityInfo,
+	                        curW: curWeather,
+	                        tomW: tomorrowWeather
+	                    };
+
+	                    callback(filterData);
+	                } else {
+
+	                    callback(false);
+	                }
+	            });
+	        }
+	    }, {
+	        key: '_getCityList',
+	        value: function _getCityList(searchType) {
+	            return $.ajax({
+	                url: CITY_API,
+	                data: {
+	                    search: searchType,
+	                    key: KEY
+	                },
+	                success: function success(data) {
+	                    return data;
+	                },
+	                error: function error(err) {
+	                    throw err;
+	                }
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+
+	            var ts = this.state;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                ' this is Weather '
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    ts.city
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '当前 ',
+	                    ts.curTmp,
+	                    '℃ ',
+	                    ts.curCondTxt
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    '明日 ',
+	                    ts.tomTempMin,
+	                    ' - ',
+	                    ts.tomTempMax,
+	                    '℃ ',
+	                    ts.tomCondTxt
+	                )
 	            );
 	        }
 	    }]);

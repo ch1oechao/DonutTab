@@ -6,10 +6,22 @@ import Clock from '../Clock/Clock.js';
 
 require('./Tab.scss');
 
+// Thanks for ihuan.me
+const BING_IMG = 'http://ihuan.me/bing';
+
+var tabStyle = {
+    backgroundImage: 'url(' + BING_IMG + ')'
+}
+
 export default class Tab extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <div className="donut-tab-container">
+            <div className="donut-tab-container" style={tabStyle}>
                 <SearchBox />
                 <Clock />
                 <Bookmark />
@@ -18,3 +30,4 @@ export default class Tab extends React.Component {
         );
     }
 }
+
