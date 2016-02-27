@@ -37,9 +37,7 @@ export default class Clock extends React.Component {
     render() {
         return (
             <div className="clock-container">
-                <span className="clock-text">It's </span>
                 <h2 className="clock-time">{this.state.curTime}</h2>
-                <span className="clock-text"> Let's start to make something beautiful 😎</span>
             </div>
         );
     }

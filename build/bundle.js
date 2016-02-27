@@ -19804,8 +19804,8 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'donut-tab-container', style: tabStyle },
-	                _react2.default.createElement(_SearchBox2.default, null),
 	                _react2.default.createElement(_Clock2.default, null),
+	                _react2.default.createElement(_SearchBox2.default, null),
 	                _react2.default.createElement(_Bookmark2.default, null),
 	                _react2.default.createElement(_Tools2.default, null),
 	                _react2.default.createElement(_Theme2.default, { onChangeTheme: this.handleCallback.bind(this) })
@@ -19833,6 +19833,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	var _Dictionary = __webpack_require__(161);
 
@@ -19883,7 +19887,8 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchBox).call(this, props));
 
 	        _this.state = {
-	            value: '',
+	            value: undefined,
+	            label: "😎 Let's make something beautiful",
 	            engines: searchEngines,
 	            curEngine: _this._getCurEngine(),
 	            enginesDict: _this._getEnginesDict(searchEngines)
@@ -19892,6 +19897,11 @@
 	    }
 
 	    _createClass(SearchBox, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.refs['searchInput'].getDOMNode().focus();
+	        }
+	    }, {
 	        key: '_getCurEngine',
 	        value: function _getCurEngine() {
 	            var localEngine = JSON.parse(localStorage.getItem('curEngine'));
@@ -19941,6 +19951,7 @@
 	        key: 'render',
 	        value: function render() {
 	            var self = this,
+	                label = this.state.label,
 	                value = this.state.value,
 	                engines = this.state.engines,
 	                curEngine = this.state.curEngine;
@@ -19957,7 +19968,13 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'searchbox-input' },
-	                            _react2.default.createElement('input', { type: 'text', value: value, name: curEngine.name, className: 'form-control',
+	                            _react2.default.createElement(
+	                                'label',
+	                                { className: 'control-label', htmlFor: curEngine.name },
+	                                label
+	                            ),
+	                            _react2.default.createElement('input', { type: 'text', value: value, id: curEngine.name, name: curEngine.name, className: 'form-control',
+	                                ref: 'searchInput',
 	                                autoComplete: 'off',
 	                                onChange: this.handleChange.bind(this),
 	                                onKeyDown: this.handleKeyDown.bind(this) })
@@ -20109,7 +20126,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 45%;\n  z-index: 9; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 52.5%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
 
 	// exports
 
@@ -20824,7 +20841,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n  z-index: 9; }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  z-index: 9; }\n", ""]);
 
 	// exports
 
@@ -20901,19 +20918,9 @@
 	                "div",
 	                { className: "clock-container" },
 	                _react2.default.createElement(
-	                    "span",
-	                    { className: "clock-text" },
-	                    "It's "
-	                ),
-	                _react2.default.createElement(
 	                    "h2",
 	                    { className: "clock-time" },
 	                    this.state.curTime
-	                ),
-	                _react2.default.createElement(
-	                    "span",
-	                    { className: "clock-text" },
-	                    " Let's start to make something beautiful 😎"
 	                )
 	            );
 	        }
@@ -20959,7 +20966,7 @@
 
 
 	// module
-	exports.push([module.id, ".clock-container {\n  width: 100%;\n  margin: 30px auto 0;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  margin: 0 10px;\n  font-size: 2.2em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
+	exports.push([module.id, ".clock-container {\n  margin: 36px 0 10px;\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  font-size: 7.7em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
 
 	// exports
 
@@ -21016,12 +21023,17 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Theme).call(this, props));
 
 	        _this.state = {
-	            isDark: false
+	            isDark: JSON.parse(localStorage.getItem('curIsDark')) ? true : false
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Theme, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.onChangeTheme(!this.state.isDark);
+	        }
+	    }, {
 	        key: 'handleClick',
 	        value: function handleClick(ev) {
 
@@ -21031,6 +21043,9 @@
 	            this.setState({
 	                isDark: !isDark
 	            });
+
+	            // set local
+	            localStorage.setItem('curIsDark', !isDark);
 
 	            this.props.onChangeTheme(isDark);
 	        }
@@ -21132,7 +21147,7 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  padding-top: 16%;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
 
 	// exports
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Dictionary from '../../libs/Dictionary.js';
 
@@ -36,11 +37,16 @@ export default class SearchBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            value: '',
+            value: undefined,
+            label: "😎 Let's make something beautiful",
             engines: searchEngines,
             curEngine: this._getCurEngine(),
             enginesDict: this._getEnginesDict(searchEngines)
         };
+    }
+
+    componentDidMount() {
+        this.refs['searchInput'].getDOMNode().focus();
     }
 
     _getCurEngine() {
@@ -85,6 +91,7 @@ export default class SearchBox extends React.Component {
 
     render() {
         var self = this,
+            label = this.state.label,
             value = this.state.value,
             engines = this.state.engines,
             curEngine = this.state.curEngine;
@@ -94,7 +101,9 @@ export default class SearchBox extends React.Component {
                 <div className="searchbox-content">
                     <form className="form-group  label-floating" name="searchForm" id="searchForm" action={curEngine.action}>
                         <div className="searchbox-input">
-                            <input type="text" value={value} name={curEngine.name} className="form-control" 
+                            <label className="control-label" htmlFor={curEngine.name}>{label}</label>
+                            <input type="text" value={value} id={curEngine.name} name={curEngine.name} className="form-control" 
+                                ref="searchInput"
                                 autoComplete="off" 
                                 onChange={this.handleChange.bind(this)}
                                 onKeyDown={this.handleKeyDown.bind(this)} />

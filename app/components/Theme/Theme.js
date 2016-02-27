@@ -24,8 +24,12 @@ export default class Theme extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isDark: false
+            isDark: JSON.parse(localStorage.getItem('curIsDark')) ? true : false
         }
+    }
+
+    componentDidMount() {
+        this.props.onChangeTheme(!this.state.isDark);
     }
 
     handleClick(ev) {
@@ -36,6 +40,9 @@ export default class Theme extends React.Component {
         this.setState({
             isDark: !isDark
         });
+
+        // set local
+        localStorage.setItem('curIsDark', !isDark);
 
         this.props.onChangeTheme(isDark);
     }
