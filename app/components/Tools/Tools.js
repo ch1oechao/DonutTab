@@ -8,7 +8,6 @@ export default class Tools extends React.Component {
     render() {
         return (
             <div className="tools-container">
-                this is Tools
                 <Calendar />
                 <Weather />
             </div>

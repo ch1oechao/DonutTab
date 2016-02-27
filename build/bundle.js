@@ -60,7 +60,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(179);
+	__webpack_require__(182);
 
 	(function main() {
 	    $.material.init();
@@ -19753,6 +19753,10 @@
 
 	var _Clock2 = _interopRequireDefault(_Clock);
 
+	var _Theme = __webpack_require__(177);
+
+	var _Theme2 = _interopRequireDefault(_Theme);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19761,14 +19765,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(177);
+	__webpack_require__(180);
 
 	// Thanks for ihuan.me
 	var BING_IMG = 'http://ihuan.me/bing';
-
-	var tabStyle = {
-	    backgroundImage: 'url(' + BING_IMG + ')'
-	};
 
 	var Tab = function (_React$Component) {
 	    _inherits(Tab, _React$Component);
@@ -19776,19 +19776,39 @@
 	    function Tab(props) {
 	        _classCallCheck(this, Tab);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).call(this, props));
+
+	        _this.state = {
+	            tabStyle: {
+	                backgroundImage: 'url(' + BING_IMG + ')'
+	            }
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Tab, [{
+	        key: 'handleCallback',
+	        value: function handleCallback(res) {
+	            this.setState({
+	                tabStyle: {
+	                    backgroundImage: 'url(' + BING_IMG + ')',
+	                    color: res ? '#212121' : '#FFF'
+	                }
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var tabStyle = this.state.tabStyle;
+
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'donut-tab-container', style: tabStyle },
 	                _react2.default.createElement(_SearchBox2.default, null),
 	                _react2.default.createElement(_Clock2.default, null),
 	                _react2.default.createElement(_Bookmark2.default, null),
-	                _react2.default.createElement(_Tools2.default, null)
+	                _react2.default.createElement(_Tools2.default, null),
+	                _react2.default.createElement(_Theme2.default, { onChangeTheme: this.handleCallback.bind(this) })
 	            );
 	        }
 	    }]);
@@ -20089,7 +20109,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 45%; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 45%;\n  z-index: 9; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
 
 	// exports
 
@@ -20489,7 +20509,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  top: 30px;\n  left: 30px; }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  top: 30px;\n  left: 30px;\n  z-index: 9; }\n", ""]);
 
 	// exports
 
@@ -20543,7 +20563,6 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'tools-container' },
-	                'this is Tools',
 	                _react2.default.createElement(_Calendar2.default, null),
 	                _react2.default.createElement(_Weather2.default, null)
 	            );
@@ -20805,7 +20824,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  bottom: 30px;\n  right: 30px; }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  top: 30px;\n  right: 30px;\n  z-index: 9; }\n", ""]);
 
 	// exports
 
@@ -20868,7 +20887,7 @@
 	                mins = this._convertTime(curTime.getMinutes()),
 	                secs = this._convertTime(curTime.getSeconds());
 
-	            return [hour, mins, secs].join(" : ");
+	            return [hour, mins].join(" : ");
 	        }
 	    }, {
 	        key: "_convertTime",
@@ -20949,10 +20968,143 @@
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	__webpack_require__(178);
+
+	var LIGHT_ICON = _react2.default.createElement(
+	    'span',
+	    { className: 'theme-icon theme-light' },
+	    _react2.default.createElement('i', { className: 'fa fa-sun-o' })
+	);
+	var DARK_ICON = _react2.default.createElement(
+	    'span',
+	    { className: 'theme-icon theme-dark' },
+	    _react2.default.createElement('i', { className: 'fa fa-moon-o' })
+	);
+	var LIGHT_STYLE = {
+	    background: 'rgba(255, 255, 255, .16)'
+	};
+	var DARK_STYLE = {
+	    background: 'rgba(0, 0, 0, .16)'
+	};
+
+	var Theme = function (_React$Component) {
+	    _inherits(Theme, _React$Component);
+
+	    function Theme(props) {
+	        _classCallCheck(this, Theme);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Theme).call(this, props));
+
+	        _this.state = {
+	            isDark: false
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Theme, [{
+	        key: 'handleClick',
+	        value: function handleClick(ev) {
+
+	            var isDark = this.state.isDark;
+
+	            // change icon
+	            this.setState({
+	                isDark: !isDark
+	            });
+
+	            this.props.onChangeTheme(isDark);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var isDark = this.state.isDark,
+	                themeStyle = isDark ? DARK_STYLE : LIGHT_STYLE;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'theme-container', style: themeStyle },
+	                _react2.default.createElement(
+	                    'div',
+	                    { onClick: this.handleClick.bind(this) },
+	                    isDark ? DARK_ICON : LIGHT_ICON
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Theme;
+	}(_react2.default.Component);
+
+	exports.default = Theme;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(178);
+	var content = __webpack_require__(179);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(165)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Theme.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Theme.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(164)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".theme-container {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 1; }\n\n.theme-icon {\n  position: absolute;\n  bottom: 20px;\n  left: 20px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  border-radius: 5px;\n  opacity: .6;\n  transition: all 180ms linear;\n  z-index: 99; }\n  .theme-icon:hover {\n    opacity: 1;\n    cursor: pointer; }\n\n.theme-light {\n  color: #009688;\n  background: #FFFFFF; }\n\n.theme-dark {\n  color: #FFFFFF;\n  background: #009688; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(181);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -20972,7 +21124,7 @@
 	}
 
 /***/ },
-/* 178 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();
@@ -20980,19 +21132,19 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  color: #FFF;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 179 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(180);
+	var content = __webpack_require__(183);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -21012,7 +21164,7 @@
 	}
 
 /***/ },
-/* 180 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();

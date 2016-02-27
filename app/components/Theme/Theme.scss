@@ -1,0 +1,49 @@
+$theme-icon-size: 30px;
+$primary-color-dark:   #00796B;
+$primary-color:        #009688;
+$primary-color-light:  #B2DFDB;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #CDDC39;
+$primary-text-color:   #212121;
+$secondary-text-color: #727272;
+$divider-color:        #B6B6B6;
+
+.theme-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.theme-icon {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: inline-block;
+    width: $theme-icon-size;
+    height: $theme-icon-size;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    opacity: .6;
+    transition: all 180ms linear;
+    z-index: 99;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+}
+
+.theme-light {
+    color: $primary-color;
+    background: $primary-color-text;
+}
+
+.theme-dark {
+    color: $primary-color-text;
+    background: $primary-color;
+}
+
