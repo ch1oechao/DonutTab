@@ -1,6 +1,178 @@
+$primary-color-dark:   #00796B;
+$primary-color:        #009688;
+$primary-color-light:  #B2DFDB;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #CDDC39;
+$primary-text-color:   #212121;
+$secondary-text-color: #727272;
+$divider-color:        #B6B6B6;
+ 
+
 .bookmark-container {
-	position: absolute;
-	top: 30px;
-	left: 30px;
-	z-index: 9;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 33%;
+    color: $primary-color-text;
+    background-color: $primary-color;
+    opacity: .9;
+    box-shadow: 6px 0 15px $primary-text-color;
+    transition: top 300ms ease-out;
+    z-index: 9;
+
+    &.fold {
+        top: -33%;
+    }
+
+    &.unfold {
+        top: 0;
+    }
+
+}
+
+.book-body {
+    margin: 0 auto 30px;
+    overflow: scroll;
+    text-align: center;
+
+    .col-md-2 {
+        margin: 3px 0;
+        border-radius: 3px;
+        transition: all 150ms linear;
+        &:hover, &:active {
+            background-color: rgba(255, 255, 255, .7);
+            > .link-setting {
+                opacity: 1;
+            }
+            > .book-link {
+                color: $primary-color-dark;
+            }
+        }
+    }
+
+    .book-link {
+        display: inline-block;
+        padding: 5px 2em;
+        color: $primary-color-text;
+        &:hover, &:active {
+            color: $primary-color-dark;
+            text-decoration: none;
+        }
+    }
+
+
+    .link-setting {
+        position: absolute;
+        top: 0;
+        right: .5em;
+        line-height: 33px;
+        opacity: 0;
+
+        .fa {
+            &:hover {
+                color: $primary-color;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+.bookmark-head {
+    margin-bottom: 10px;
+
+    h3 {
+        display: inline-block;
+        width: 50%;
+    }
+
+    .book-input {
+        display: inline;
+        margin-left: 1em;
+        width: 15em;
+    }
+}
+
+.book-edit {
+    display: none;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    width: 75%;
+    transform: translate(-50%, -50%);
+
+    .form-group {
+        display: inline;
+
+        .btn {
+            margin-left: 22px;
+        }
+    }
+
+    .book-label {
+        display: inline-block;
+        width: 50px;
+        text-align: center;
+    }
+
+    .book-link-input {
+        display: inline-block;
+        &.name {
+            width: 15%;
+        }
+        &.link {
+            width: 60%;
+        }
+    }
+
+    .well-close {
+        position: absolute;
+        top: 3px;
+        right: 22px;
+        color: $accent-color;
+        cursor: pointer;
+
+        &:hover {
+            color: $secondary-text-color;
+        }
+    }
+
+}
+
+.bookmark-btn {
+    position: absolute;
+    top: 97.5%;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 45px;
+    background-color: $primary-color;
+    cursor: pointer;
+
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 14px;
+        left: -15px;
+        height: 0;
+        border: 15px dashed transparent;
+        border-bottom-color: $primary-color;
+        transform: rotate(-45deg);
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        height: 0;
+        border: 15px dashed transparent;
+        border-top-color: $primary-color;
+        transform: rotate(90deg);
+    }
+
 }

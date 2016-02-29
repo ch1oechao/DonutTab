@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('./Weather.scss');
+
 const WEATHER_API = 'https://api.heweather.com/x3/weather';
 const CITY_API = 'https://api.heweather.com/x3/citylist';
 const KEY = 'ac32bea2133a4f849fc136a0ffae65dd';
@@ -12,7 +14,7 @@ export default class Weather extends React.Component {
     }
 
     componentDidMount() {
-        var defaultCityName = 'beijing',
+        var defaultCityName = localStorage.getItem('curCity') ? localStorage.getItem('curCity') : 'shaoyang',
             defaultSearchType = 'allchina';
 
         this._getCityWeather(defaultCityName, (data) => {
@@ -99,10 +101,11 @@ export default class Weather extends React.Component {
         var ts = this.state;
 
         return (
-            <div> 
-                <p>{ts.city}</p>
-                <p>当前 {ts.curTmp}℃ {ts.curCondTxt}</p>
-                <p>明日 {ts.tomTempMin} - {ts.tomTempMax}℃ {ts.tomCondTxt}</p>
+            <div className="weather-container"> 
+                <div className="weather-city">
+                    {ts.city} <span>{ts.curTmp}℃ {ts.curCondTxt}</span>
+                </div>
+                <div>明日 {ts.tomTempMin} - {ts.tomTempMax}℃ {ts.tomCondTxt}</div>
             </div>
         );
     }

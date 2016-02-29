@@ -46,7 +46,7 @@ export default class SearchBox extends React.Component {
     }
 
     componentDidMount() {
-        this.refs['searchInput'].getDOMNode().focus();
+        this.refs.searchInput.focus();
     }
 
     _getCurEngine() {
