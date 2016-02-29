@@ -6,6 +6,7 @@ $accent-color:         #CDDC39;
 $primary-text-color:   #212121;
 $secondary-text-color: #727272;
 $divider-color:        #B6B6B6;
+$danger-text-color:    #F44336;
  
 
 .bookmark-container {
@@ -61,23 +62,25 @@ $divider-color:        #B6B6B6;
     }
 
 
-    .fa {
+    .link-setting {
         position: absolute;
         top: 0;
         line-height: 33px;
         opacity: 0;
-
-        &:hover {
-            color: $primary-color;
-            cursor: pointer;
-        }
+        cursor: pointer;
 
         &.del {
             left: .5em;
+            &:hover {
+                color: $danger-text-color;
+            }
         }
 
         &.edit {
             right: .5em;
+            &:hover {
+                color: $primary-color;
+            }
         }
     }
 }
