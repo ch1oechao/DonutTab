@@ -36,7 +36,7 @@ export default class Bookmark extends React.Component {
         this.state = {
             isFold: true,
             bookName: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
-            titleVal: '',
+            titleVal: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
             titleStyle: showStyle,
             inputStyle: hideStyle,
             bookLinks: this._getBookLinks(),
@@ -55,13 +55,14 @@ export default class Bookmark extends React.Component {
 
     titleClick(ev) {
         this.setState({
+            titleVal: this.state.bookName,
             titleStyle: hideStyle,
             inputStyle: showStyle
         })
     }
 
     titleChange(ev) {
-         this.setState({titleVal: ev.target.value});
+         this.setState({titleVal: ev.target.value ? ev.target.value : '-'});
     }
 
     titleEdit(ev) {
@@ -204,11 +205,9 @@ export default class Bookmark extends React.Component {
                                 var linkName = self._firstLetterToUpperCase(item.name);
                                 return (
                                     <div className="col-md-2" key={idx}>
+                                        <i className="fa fa-fw fa-ellipsis-h del" data-name={item.name} onClick={this.deleteLink.bind(this)} title="DEL"></i>
                                         <a href={item.link} className="book-link">{linkName}</a>
-                                        <div className="link-setting">
-                                            <i className="fa fa-fw fa-ellipsis-h" data-name={item.name} onClick={this.deleteLink.bind(this)} title="DEL"></i>
-                                            <i className="fa fa-fw fa-ellipsis-v" data-name={item.name} onClick={this.editLink.bind(this)} title="EDIT"></i>
-                                        </div>
+                                        <i className="fa fa-fw fa-ellipsis-v edit" data-name={item.name} onClick={this.editLink.bind(this)} title="EDIT"></i>
                                     </div>
                                 )
                             })}

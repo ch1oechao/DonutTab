@@ -60,7 +60,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(182);
+	__webpack_require__(186);
 
 	(function main() {
 	    $.material.init();
@@ -19749,11 +19749,11 @@
 
 	var _Tools2 = _interopRequireDefault(_Tools);
 
-	var _Clock = __webpack_require__(174);
+	var _Clock = __webpack_require__(178);
 
 	var _Clock2 = _interopRequireDefault(_Clock);
 
-	var _Theme = __webpack_require__(177);
+	var _Theme = __webpack_require__(181);
 
 	var _Theme2 = _interopRequireDefault(_Theme);
 
@@ -19765,7 +19765,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(180);
+	__webpack_require__(184);
 
 	// Thanks for ihuan.me
 	var BING_IMG = 'http://ihuan.me/bing';
@@ -19899,7 +19899,7 @@
 	    _createClass(SearchBox, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.refs['searchInput'].getDOMNode().focus();
+	            this.refs.searchInput.focus();
 	        }
 	    }, {
 	        key: '_getCurEngine',
@@ -20444,7 +20444,7 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -20466,22 +20466,324 @@
 
 	__webpack_require__(167);
 
+	var showStyle = {
+	    display: 'inline'
+	};
+	var hideStyle = {
+	    display: 'none'
+	};
+
+	var DefaultLinks = [{
+	    "link": "https://github.com/",
+	    "name": "GitHub"
+	}, {
+	    "link": "http://www.imooc.com/",
+	    "name": "Imooc"
+	}, {
+	    "link": "http://www.uisdc.com/",
+	    "name": "优设"
+	}, {
+	    "link": "https://dribbble.com/",
+	    "name": "dribbble"
+	}, {
+	    "link": "http://www.bootcdn.cn/",
+	    "name": "BootCDN"
+	}, {
+	    "link": "http://www.panc.cc/",
+	    "name": "胖次"
+	}];
+
 	var Bookmark = function (_React$Component) {
 	    _inherits(Bookmark, _React$Component);
 
-	    function Bookmark() {
+	    function Bookmark(props) {
 	        _classCallCheck(this, Bookmark);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Bookmark).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Bookmark).call(this, props));
+
+	        _this.state = {
+	            isFold: true,
+	            bookName: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
+	            titleVal: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
+	            titleStyle: showStyle,
+	            inputStyle: hideStyle,
+	            bookLinks: _this._getBookLinks(),
+	            addNameVal: '',
+	            addLinkVal: ''
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Bookmark, [{
-	        key: "render",
+	        key: '_getBookLinks',
+	        value: function _getBookLinks() {
+	            var bookLinks = localStorage.getItem('curBookLinks');
+	            if (!bookLinks) {
+	                localStorage.setItem('curBookLinks', JSON.stringify(DefaultLinks));
+	            }
+	            return JSON.parse(localStorage.getItem('curBookLinks'));
+	        }
+	    }, {
+	        key: 'titleClick',
+	        value: function titleClick(ev) {
+	            this.setState({
+	                titleVal: this.state.bookName,
+	                titleStyle: hideStyle,
+	                inputStyle: showStyle
+	            });
+	        }
+	    }, {
+	        key: 'titleChange',
+	        value: function titleChange(ev) {
+	            this.setState({ titleVal: ev.target.value ? ev.target.value : '-' });
+	        }
+	    }, {
+	        key: 'titleEdit',
+	        value: function titleEdit(ev) {
+	            if (+ev.keyCode === 13) {
+	                this.setState({
+	                    bookName: this.state.titleVal,
+	                    titleStyle: showStyle,
+	                    inputStyle: hideStyle
+	                });
+	                localStorage.setItem('curBookTitle', this.state.titleVal);
+	            }
+	        }
+	    }, {
+	        key: 'renderAdd',
+	        value: function renderAdd(name, link) {
+	            this.setState({
+	                addNameVal: name ? name : '',
+	                addLinkVal: link ? link : ''
+	            });
+	        }
+	    }, {
+	        key: 'renderLinks',
+	        value: function renderLinks(links) {
+	            this.setState({
+	                bookLinks: links
+	            });
+	            localStorage.setItem('curBookLinks', JSON.stringify(links));
+	        }
+	    }, {
+	        key: 'addOpen',
+	        value: function addOpen(ev) {
+	            $(this.refs.addPanel).show();
+	            this.renderAdd();
+	        }
+	    }, {
+	        key: 'addSave',
+	        value: function addSave(ev) {
+	            var localBookLinks = this._getBookLinks(),
+	                newItem = {
+	                "name": this.state.addNameVal,
+	                "link": this.state.addLinkVal
+	            };
+
+	            localBookLinks.map(function (item, idx) {
+	                if (item.name === newItem.name) {
+	                    localBookLinks.splice(idx, 1);
+	                }
+	            });
+
+	            localBookLinks.push(newItem);
+
+	            this.renderLinks(localBookLinks);
+
+	            this.addClose();
+	        }
+	    }, {
+	        key: 'addClose',
+	        value: function addClose(ev) {
+	            $(this.refs.addPanel).hide();
+	            this.renderAdd();
+	        }
+	    }, {
+	        key: 'addNameChange',
+	        value: function addNameChange(ev) {
+	            this.setState({ addNameVal: ev.target.value });
+	        }
+	    }, {
+	        key: 'addLinkChange',
+	        value: function addLinkChange(ev) {
+	            this.setState({ addLinkVal: ev.target.value });
+	        }
+	    }, {
+	        key: 'deleteLink',
+	        value: function deleteLink(ev) {
+	            var delItem = {
+	                name: ev.target.getAttribute('data-name')
+	            };
+	            var links = this._getBookLinks();
+	            links.map(function (item, idx) {
+	                if (item.name === delItem.name) {
+	                    links.splice(idx, 1);
+	                }
+	            });
+
+	            this.renderLinks(links);
+	        }
+	    }, {
+	        key: 'editLink',
+	        value: function editLink(ev) {
+	            var _this2 = this;
+
+	            var self = this,
+	                editItem = {
+	                name: ev.target.getAttribute('data-name')
+	            };
+	            var links = this._getBookLinks();
+
+	            links.map(function (item, idx) {
+	                if (item.name === editItem.name) {
+	                    self.addOpen();
+	                    _this2.setState({
+	                        addNameVal: item.name,
+	                        addLinkVal: item.link
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'btnClick',
+	        value: function btnClick(ev) {
+	            this.setState({
+	                isFold: !this.state.isFold
+	            });
+	        }
+	    }, {
+	        key: '_firstLetterToUpperCase',
+	        value: function _firstLetterToUpperCase(str) {
+	            return str.substring(0, 1).toUpperCase() + str.substring(1);
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
+	            var _this3 = this;
+
+	            var self = this,
+	                isFold = this.state.isFold,
+	                bookConClass = 'bookmark-container',
+	                bookName = this.state.bookName,
+	                titleVal = this.state.titleVal,
+	                titleStyle = this.state.titleStyle,
+	                inputStyle = this.state.inputStyle,
+	                bookLinks = this.state.bookLinks,
+	                addNameVal = this.state.addNameVal,
+	                addLinkVal = this.state.addLinkVal;
+
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "bookmark-container" },
-	                "this is bookmark"
+	                'div',
+	                { className: bookConClass += isFold ? ' fold' : ' unfold' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'bookmark-content' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'container' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'bookmark-head' },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                { className: 'form-group has-success' },
+	                                _react2.default.createElement('i', { className: 'fa fa-bookmark-o fa-fw' }),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'book-title',
+	                                        onClick: this.titleClick.bind(this),
+	                                        style: titleStyle },
+	                                    ' ',
+	                                    bookName
+	                                ),
+	                                _react2.default.createElement('input', { className: 'form-control book-input',
+	                                    value: titleVal, style: inputStyle,
+	                                    onChange: this.titleChange.bind(this),
+	                                    onKeyDown: this.titleEdit.bind(this) })
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'book-body row' },
+	                            bookLinks.map(function (item, idx) {
+	                                var linkName = self._firstLetterToUpperCase(item.name);
+	                                return _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'col-md-2', key: idx },
+	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h del', 'data-name': item.name, onClick: _this3.deleteLink.bind(_this3), title: 'DEL' }),
+	                                    _react2.default.createElement(
+	                                        'a',
+	                                        { href: item.link, className: 'book-link' },
+	                                        linkName
+	                                    ),
+	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v edit', 'data-name': item.name, onClick: _this3.editLink.bind(_this3), title: 'EDIT' })
+	                                );
+	                            }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-md-2' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'javascript:void(0)',
+	                                        className: 'book-link',
+	                                        onClick: this.addOpen.bind(this) },
+	                                    _react2.default.createElement('i', { className: 'fa fa-plus fa-fw' })
+	                                )
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'book-edit container', ref: 'addPanel' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'well' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                { className: 'book-label', htmlFor: 'bookLabel' },
+	                                _react2.default.createElement('i', { className: 'fa fa-tag' })
+	                            ),
+	                            _react2.default.createElement('input', { className: 'form-control book-link-input name',
+	                                value: addNameVal, id: 'bookLabel', onChange: this.addNameChange.bind(this) })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-group' },
+	                            _react2.default.createElement(
+	                                'label',
+	                                { className: 'book-label', htmlFor: 'bookLink' },
+	                                _react2.default.createElement('i', { className: 'fa fa-link' })
+	                            ),
+	                            _react2.default.createElement('input', { className: 'form-control book-link-input link',
+	                                value: addLinkVal, id: 'bookLink', onChange: this.addLinkChange.bind(this) })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'form-group' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: 'javascript:void(0)',
+	                                    className: 'btn btn-primary',
+	                                    onClick: this.addSave.bind(this) },
+	                                'Save'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'well-close', onClick: this.addClose.bind(this) },
+	                            _react2.default.createElement('i', { className: 'fa fa-times' })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'bookmark-btn', onClick: this.btnClick.bind(this) },
+	                    _react2.default.createElement('i', { className: 'fa fa-star' })
+	                )
 	            );
 	        }
 	    }]);
@@ -20526,7 +20828,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  top: 30px;\n  left: 30px;\n  z-index: 9; }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 33%;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .bookmark-container.fold {\n    top: -33%; }\n  .bookmark-container.unfold {\n    top: 0; }\n\n.book-body {\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .fa {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0; }\n    .book-body .fa:hover {\n      color: #009688;\n      cursor: pointer; }\n    .book-body .fa.del {\n      left: .5em; }\n    .book-body .fa.edit {\n      right: .5em; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 65%;\n  left: 50%;\n  width: 75%;\n  transform: translate(-50%, -50%); }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 15%; }\n    .book-edit .book-link-input.link {\n      width: 60%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 22px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n\n.bookmark-btn {\n  position: absolute;\n  top: 97.5%;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .bookmark-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .bookmark-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 
@@ -20551,7 +20853,7 @@
 
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
-	var _Weather = __webpack_require__(171);
+	var _Weather = __webpack_require__(173);
 
 	var _Weather2 = _interopRequireDefault(_Weather);
 
@@ -20563,7 +20865,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(172);
+	__webpack_require__(176);
 
 	var Tools = function (_React$Component) {
 	    _inherits(Tools, _React$Component);
@@ -20615,22 +20917,57 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	__webpack_require__(171);
+
+	var weeks = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
+	var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 	var Calendar = function (_React$Component) {
 		_inherits(Calendar, _React$Component);
 
-		function Calendar() {
+		function Calendar(props) {
 			_classCallCheck(this, Calendar);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
+
+			_this.state = {};
+			return _this;
 		}
 
 		_createClass(Calendar, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {}
+		}, {
+			key: '_getCurDate',
+			value: function _getCurDate() {
+				var self = this,
+				    curTime = new Date(),
+				    week = curTime.getDay(),
+				    day = this._convertTime(curTime.getDate()),
+				    month = this._convertTime(curTime.getMonth() + 1),
+				    year = curTime.getFullYear();
+
+				return [year, month, day].join(' / ') + ' ' + weeks[week];
+			}
+		}, {
+			key: '_convertTime',
+			value: function _convertTime(time) {
+				return time >= 10 ? time : '0' + time;
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+
+				var date = this._getCurDate();
+
 				return _react2.default.createElement(
 					'div',
-					null,
-					' this is Calendar '
+					{ className: 'calendar-container' },
+					_react2.default.createElement(
+						'span',
+						null,
+						date
+					)
 				);
 			}
 		}]);
@@ -20642,6 +20979,46 @@
 
 /***/ },
 /* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(172);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(165)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Calendar.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Calendar.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(164)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20664,6 +21041,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	__webpack_require__(174);
+
 	var WEATHER_API = 'https://api.heweather.com/x3/weather';
 	var CITY_API = 'https://api.heweather.com/x3/citylist';
 	var KEY = 'ac32bea2133a4f849fc136a0ffae65dd';
@@ -20685,7 +21064,7 @@
 	        value: function componentDidMount() {
 	            var _this2 = this;
 
-	            var defaultCityName = 'beijing',
+	            var defaultCityName = localStorage.getItem('curCity') ? localStorage.getItem('curCity') : 'shaoyang',
 	                defaultSearchType = 'allchina';
 
 	            this._getCityWeather(defaultCityName, function (data) {
@@ -20773,22 +21152,22 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'weather-container' },
 	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    ts.city
+	                    'div',
+	                    { className: 'weather-city' },
+	                    ts.city,
+	                    ' ',
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        ts.curTmp,
+	                        '℃ ',
+	                        ts.curCondTxt
+	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    '当前 ',
-	                    ts.curTmp,
-	                    '℃ ',
-	                    ts.curCondTxt
-	                ),
-	                _react2.default.createElement(
-	                    'p',
+	                    'div',
 	                    null,
 	                    '明日 ',
 	                    ts.tomTempMin,
@@ -20807,13 +21186,53 @@
 	exports.default = Weather;
 
 /***/ },
-/* 172 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(173);
+	var content = __webpack_require__(175);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(165)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Weather.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Weather.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(164)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(177);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -20833,7 +21252,7 @@
 	}
 
 /***/ },
-/* 173 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();
@@ -20841,13 +21260,13 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  z-index: 9; }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n  z-index: 9; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 174 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20870,7 +21289,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(175);
+	__webpack_require__(179);
 
 	var Clock = function (_React$Component) {
 	    _inherits(Clock, _React$Component);
@@ -20932,13 +21351,13 @@
 	exports.default = Clock;
 
 /***/ },
-/* 175 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(176);
+	var content = __webpack_require__(180);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -20958,7 +21377,7 @@
 	}
 
 /***/ },
-/* 176 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();
@@ -20966,13 +21385,13 @@
 
 
 	// module
-	exports.push([module.id, ".clock-container {\n  margin: 36px 0 10px;\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  font-size: 7.7em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
+	exports.push([module.id, ".clock-container {\n  margin-bottom: 5px;\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  font-size: 7.7em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 177 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20995,7 +21414,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(178);
+	__webpack_require__(182);
 
 	var LIGHT_ICON = _react2.default.createElement(
 	    'span',
@@ -21073,13 +21492,13 @@
 	exports.default = Theme;
 
 /***/ },
-/* 178 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(179);
+	var content = __webpack_require__(183);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -21099,7 +21518,7 @@
 	}
 
 /***/ },
-/* 179 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();
@@ -21113,13 +21532,13 @@
 
 
 /***/ },
-/* 180 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(181);
+	var content = __webpack_require__(185);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -21139,7 +21558,7 @@
 	}
 
 /***/ },
-/* 181 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();
@@ -21147,19 +21566,19 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  padding-top: 16%;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  padding-top: 20%;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 182 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(183);
+	var content = __webpack_require__(187);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -21179,7 +21598,7 @@
 	}
 
 /***/ },
-/* 183 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();

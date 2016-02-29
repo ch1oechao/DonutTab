@@ -41,7 +41,7 @@ $divider-color:        #B6B6B6;
         transition: all 150ms linear;
         &:hover, &:active {
             background-color: rgba(255, 255, 255, .7);
-            > .link-setting {
+            > .fa {
                 opacity: 1;
             }
             > .book-link {
@@ -61,18 +61,23 @@ $divider-color:        #B6B6B6;
     }
 
 
-    .link-setting {
+    .fa {
         position: absolute;
         top: 0;
-        right: .5em;
         line-height: 33px;
         opacity: 0;
 
-        .fa {
-            &:hover {
-                color: $primary-color;
-                cursor: pointer;
-            }
+        &:hover {
+            color: $primary-color;
+            cursor: pointer;
+        }
+
+        &.del {
+            left: .5em;
+        }
+
+        &.edit {
+            right: .5em;
         }
     }
 }
