@@ -2,6 +2,7 @@
 
 .bookmark-container {
     position: relative;
+    top: -5px;
     left: 2%;
     width: 95%;
     height: 225px;
@@ -79,6 +80,7 @@
         display: inline;
         margin-left: 1em;
         width: 15em;
+        height: 25px;
     }
 }
 

@@ -2,8 +2,9 @@
 
 .calendar-head {
     position: relative;
-    top: 5px;
+    top: 3px;
     left: -29px;
+    margin-bottom: 18px;
     .fa {
         font-size: .8em;
     }
@@ -33,6 +34,7 @@
             height: 22px;
             width: 22px;
             border-radius: 50%;
+            transition: all 200ms ease-out;
             cursor: pointer;
 
             &.active {

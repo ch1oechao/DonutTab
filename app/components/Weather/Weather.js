@@ -6,31 +6,88 @@ const WEATHER_API = 'https://api.heweather.com/x3/weather';
 const CITY_API = 'https://api.heweather.com/x3/citylist';
 const KEY = 'ac32bea2133a4f849fc136a0ffae65dd';
 
+const showStyle = {
+    display: 'inline'
+};
+const hideStyle = {
+    display: 'none'
+};
+
 export default class Weather extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            city: localStorage.getItem('curCity') ? localStorage.getItem('curCity') : 'Beijing',
+            hasCity: true,
+            pickday: this.props.pickday,
+            foreWs: [],
+            cityStyle: showStyle,
+            inputStyle: hideStyle
+        };
     }
 
     componentDidMount() {
-        var defaultCityName = localStorage.getItem('curCity') ? localStorage.getItem('curCity') : 'shaoyang',
-            defaultSearchType = 'allchina';
+        this.renderWeather(this.state.city);
+    }
 
-        this._getCityWeather(defaultCityName, (data) => {
+    renderWeather(city) {
+        this._getCityWeather(city, (data) => {
 
-            if (!data) return; 
+            if (!data) {
+                this.setState({
+                    hasCity: false
+                });
+                return;
+            }
 
             this.setState({
-                city: data.city.city,
+                hasCity: true,
                 curTmp: data.curW.tmp,
                 curCondTxt: data.curW.cond.txt,
-                tomTempMin: data.tomW.tmp.min,
-                tomTempMax: data.tomW.tmp.max,
-                tomCondTxt: data.tomW.cond.txt_d
-            })
-        });
+                foreWs: data.foreWs,
+                curPickWeather: data.foreWs[this.props.pickIndex]
+            });
 
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.pickIndex !== nextProps.pickIndex) {
+            this.setState({
+                curPickWeather: this._getPickWeather(nextProps.pickIndex)
+            });
+        }
+    }
+
+    cityClick(ev) {
+        this.setState({
+            cityName: this.state.city,
+            cityStyle: hideStyle,
+            inputStyle: showStyle
+        });
+    }
+
+    cityEdit(ev) {
+        if (+ev.keyCode === 13) {
+            this.setState({
+                city: this.state.cityName,
+                cityStyle: showStyle,
+                inputStyle: hideStyle
+            });
+
+            localStorage.setItem('curCity', this.state.cityName);
+
+            this.renderWeather(this.state.cityName);
+        }
+    }
+
+    cityChange(ev) {
+        this.setState({cityName: ev.target.value});
+    }
+
+    _getPickWeather(idx) {
+        return this.state.foreWs[idx];
     }
 
     _getCityWeather(cityName, callback) {
@@ -58,24 +115,21 @@ export default class Weather extends React.Component {
 
             var cityInfo = weather.basic ? weather.basic : null,
                 curWeather = weather.now ? weather.now : null,
-                tomorrowWeather = Array.isArray(weather.daily_forecast) ? weather.daily_forecast[0] : null;
+                foreWeathers = Array.isArray(weather.daily_forecast) ? weather.daily_forecast : null;
 
-            if (cityInfo && curWeather && tomorrowWeather) {
+            if (cityInfo && curWeather && foreWeathers) {
 
                 var filterData = {
                     city: cityInfo,
                     curW: curWeather,
-                    tomW: tomorrowWeather
+                    foreWs: foreWeathers
                 };
 
                 callback(filterData);
 
             } else {
-
                 callback(false);
-
             }
-
         });
 
     }
@@ -96,16 +150,49 @@ export default class Weather extends React.Component {
         })
     }
 
+    _convertName(str) {
+        if (str.length > 9) {
+            return str.substring(0, 1).toUpperCase() + str.substring(1, 6) + '...'; 
+        } else {
+            return str.substring(0, 1).toUpperCase() + str.substring(1);   
+        }
+    }
+
     render() {
 
-        var ts = this.state;
+        var ts = this.state,
+            hasCity = ts.hasCity,
+            cityName = ts.cityName,
+            curPickW = ts.curPickWeather,
+            cityStyle = ts.cityStyle,
+            inputStyle = ts.inputStyle,
+            foreDate = curPickW ? curPickW.date.substring(5).split('-').join(' / ') : '';
+
+        let noCityWeather = (<span className="weather-noinfo">There is no {this._convertName(ts.city)}'s weather info.</span>);
+
+        let renderCityWeather = (
+                <div className="weather-info">
+                    <p>
+                        <span className="label label-success">Right now</span>
+                        {ts.curTmp}℃ {ts.curCondTxt}
+                    </p>
+                    <p>
+                        <span className="label label-info">{foreDate}</span>
+                        {curPickW ? (curPickW.tmp.min + ' ~ ' + curPickW.tmp.max + '℃ ' + curPickW.cond.txt_d) : 'There is no more forecast.'}
+                    </p>
+                </div>
+            );
 
         return (
             <div className="weather-container"> 
-                <div className="weather-city">
-                    {ts.city} <span>{ts.curTmp}℃ {ts.curCondTxt}</span>
+                <div className="weather-location form-group has-success">
+                   <i className="fa fa-fw fa-map-marker"></i>
+                   <span className="weather-city" style={cityStyle} onClick={this.cityClick.bind(this)}>{this._convertName(ts.city)}</span>
+                   <input className="form-control input-sm weather-city-input" value={cityName} 
+                        onChange={this.cityChange.bind(this)} 
+                        onKeyDown={this.cityEdit.bind(this)} style={inputStyle} />
                 </div>
-                <div>明日 {ts.tomTempMin} - {ts.tomTempMax}℃ {ts.tomCondTxt}</div>
+                {hasCity ? renderCityWeather : noCityWeather}
             </div>
         );
     }

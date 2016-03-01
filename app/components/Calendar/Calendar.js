@@ -30,8 +30,12 @@ export default class Calendar extends React.Component {
 
     weekClick(ev) {
         let pickWeek = +ev.target.getAttribute('data-week');
+        this.weekChange(pickWeek);        
+    }
+
+    weekChange(week) {
         this.setState({
-            pickWeek: pickWeek
+            pickWeek: week
         });
     }
 
@@ -86,16 +90,16 @@ export default class Calendar extends React.Component {
             curMonth = time.month || this._getDateVal().month,
             curYear = time.year || this._getDateVal().year,
             weekArr = [],
-            foreDay = curDay - curWeek, 
+            beforeDay = curDay - curWeek, 
             afterDay = curDay,
             firstDay = 1,
             lastDay = this._getMonthLen(curMonth, curYear);
 
         for (var i = 0; i < weekLen; i++) {
             if (i < curWeek) {
-                if (foreDay > 0) {
-                    weekArr.push(foreDay);
-                    foreDay += 1;    
+                if (beforeDay > 0) {
+                    weekArr.push(beforeDay);
+                    beforeDay += 1;    
                 } else {
                     weekArr.push('');
                 }
@@ -168,7 +172,7 @@ export default class Calendar extends React.Component {
                         )
                     })}
                 </ul>
-                <Weather />
+                <Weather pickIndex={pickWeek - curDateVal.week} />
             </div>
         );
     }

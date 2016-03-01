@@ -20686,7 +20686,7 @@
 	                                ' ',
 	                                bookName
 	                            ),
-	                            _react2.default.createElement('input', { className: 'form-control book-input',
+	                            _react2.default.createElement('input', { className: 'form-control book-input input-sm',
 	                                value: titleVal, style: inputStyle,
 	                                onChange: this.titleChange.bind(this),
 	                                onKeyDown: this.titleEdit.bind(this) })
@@ -20812,7 +20812,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  left: 2%;\n  width: 95%;\n  height: 225px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  top: -5px;\n  left: 2%;\n  width: 95%;\n  height: 225px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em;\n    height: 25px; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
 
 	// exports
 
@@ -20978,8 +20978,13 @@
 	        key: 'weekClick',
 	        value: function weekClick(ev) {
 	            var pickWeek = +ev.target.getAttribute('data-week');
+	            this.weekChange(pickWeek);
+	        }
+	    }, {
+	        key: 'weekChange',
+	        value: function weekChange(week) {
 	            this.setState({
-	                pickWeek: pickWeek
+	                pickWeek: week
 	            });
 	        }
 	    }, {
@@ -21036,16 +21041,16 @@
 	                curMonth = time.month || this._getDateVal().month,
 	                curYear = time.year || this._getDateVal().year,
 	                weekArr = [],
-	                foreDay = curDay - curWeek,
+	                beforeDay = curDay - curWeek,
 	                afterDay = curDay,
 	                firstDay = 1,
 	                lastDay = this._getMonthLen(curMonth, curYear);
 
 	            for (var i = 0; i < weekLen; i++) {
 	                if (i < curWeek) {
-	                    if (foreDay > 0) {
-	                        weekArr.push(foreDay);
-	                        foreDay += 1;
+	                    if (beforeDay > 0) {
+	                        weekArr.push(beforeDay);
+	                        beforeDay += 1;
 	                    } else {
 	                        weekArr.push('');
 	                    }
@@ -21136,7 +21141,7 @@
 	                        );
 	                    })
 	                ),
-	                _react2.default.createElement(_Weather2.default, null)
+	                _react2.default.createElement(_Weather2.default, { pickIndex: pickWeek - curDateVal.week })
 	            );
 	        }
 	    }]);
@@ -21176,6 +21181,13 @@
 	var CITY_API = 'https://api.heweather.com/x3/citylist';
 	var KEY = 'ac32bea2133a4f849fc136a0ffae65dd';
 
+	var showStyle = {
+	    display: 'inline'
+	};
+	var hideStyle = {
+	    display: 'none'
+	};
+
 	var Weather = function (_React$Component) {
 	    _inherits(Weather, _React$Component);
 
@@ -21184,31 +21196,87 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Weather).call(this, props));
 
-	        _this.state = {};
+	        _this.state = {
+	            city: localStorage.getItem('curCity') ? localStorage.getItem('curCity') : 'Beijing',
+	            hasCity: true,
+	            pickday: _this.props.pickday,
+	            foreWs: [],
+	            cityStyle: showStyle,
+	            inputStyle: hideStyle
+	        };
 	        return _this;
 	    }
 
 	    _createClass(Weather, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            this.renderWeather(this.state.city);
+	        }
+	    }, {
+	        key: 'renderWeather',
+	        value: function renderWeather(city) {
 	            var _this2 = this;
 
-	            var defaultCityName = localStorage.getItem('curCity') ? localStorage.getItem('curCity') : 'shaoyang',
-	                defaultSearchType = 'allchina';
+	            this._getCityWeather(city, function (data) {
 
-	            this._getCityWeather(defaultCityName, function (data) {
-
-	                if (!data) return;
+	                if (!data) {
+	                    _this2.setState({
+	                        hasCity: false
+	                    });
+	                    return;
+	                }
 
 	                _this2.setState({
-	                    city: data.city.city,
+	                    hasCity: true,
 	                    curTmp: data.curW.tmp,
 	                    curCondTxt: data.curW.cond.txt,
-	                    tomTempMin: data.tomW.tmp.min,
-	                    tomTempMax: data.tomW.tmp.max,
-	                    tomCondTxt: data.tomW.cond.txt_d
+	                    foreWs: data.foreWs,
+	                    curPickWeather: data.foreWs[_this2.props.pickIndex]
 	                });
 	            });
+	        }
+	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (this.props.pickIndex !== nextProps.pickIndex) {
+	                this.setState({
+	                    curPickWeather: this._getPickWeather(nextProps.pickIndex)
+	                });
+	            }
+	        }
+	    }, {
+	        key: 'cityClick',
+	        value: function cityClick(ev) {
+	            this.setState({
+	                cityName: this.state.city,
+	                cityStyle: hideStyle,
+	                inputStyle: showStyle
+	            });
+	        }
+	    }, {
+	        key: 'cityEdit',
+	        value: function cityEdit(ev) {
+	            if (+ev.keyCode === 13) {
+	                this.setState({
+	                    city: this.state.cityName,
+	                    cityStyle: showStyle,
+	                    inputStyle: hideStyle
+	                });
+
+	                localStorage.setItem('curCity', this.state.cityName);
+
+	                this.renderWeather(this.state.cityName);
+	            }
+	        }
+	    }, {
+	        key: 'cityChange',
+	        value: function cityChange(ev) {
+	            this.setState({ cityName: ev.target.value });
+	        }
+	    }, {
+	        key: '_getPickWeather',
+	        value: function _getPickWeather(idx) {
+	            return this.state.foreWs[idx];
 	        }
 	    }, {
 	        key: '_getCityWeather',
@@ -21239,19 +21307,18 @@
 
 	                var cityInfo = weather.basic ? weather.basic : null,
 	                    curWeather = weather.now ? weather.now : null,
-	                    tomorrowWeather = Array.isArray(weather.daily_forecast) ? weather.daily_forecast[0] : null;
+	                    foreWeathers = Array.isArray(weather.daily_forecast) ? weather.daily_forecast : null;
 
-	                if (cityInfo && curWeather && tomorrowWeather) {
+	                if (cityInfo && curWeather && foreWeathers) {
 
 	                    var filterData = {
 	                        city: cityInfo,
 	                        curW: curWeather,
-	                        tomW: tomorrowWeather
+	                        foreWs: foreWeathers
 	                    };
 
 	                    callback(filterData);
 	                } else {
-
 	                    callback(false);
 	                }
 	            });
@@ -21274,37 +21341,78 @@
 	            });
 	        }
 	    }, {
+	        key: '_convertName',
+	        value: function _convertName(str) {
+	            if (str.length > 9) {
+	                return str.substring(0, 1).toUpperCase() + str.substring(1, 6) + '...';
+	            } else {
+	                return str.substring(0, 1).toUpperCase() + str.substring(1);
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 
-	            var ts = this.state;
+	            var ts = this.state,
+	                hasCity = ts.hasCity,
+	                cityName = ts.cityName,
+	                curPickW = ts.curPickWeather,
+	                cityStyle = ts.cityStyle,
+	                inputStyle = ts.inputStyle,
+	                foreDate = curPickW ? curPickW.date.substring(5).split('-').join(' / ') : '';
+
+	            var noCityWeather = _react2.default.createElement(
+	                'span',
+	                { className: 'weather-noinfo' },
+	                'There is no ',
+	                this._convertName(ts.city),
+	                '\'s weather info.'
+	            );
+
+	            var renderCityWeather = _react2.default.createElement(
+	                'div',
+	                { className: 'weather-info' },
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'label label-success' },
+	                        'Right now'
+	                    ),
+	                    ts.curTmp,
+	                    '℃ ',
+	                    ts.curCondTxt
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'label label-info' },
+	                        foreDate
+	                    ),
+	                    curPickW ? curPickW.tmp.min + ' ~ ' + curPickW.tmp.max + '℃ ' + curPickW.cond.txt_d : 'There is no more forecast.'
+	                )
+	            );
 
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'weather-container' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'weather-city' },
-	                    ts.city,
-	                    ' ',
+	                    { className: 'weather-location form-group has-success' },
+	                    _react2.default.createElement('i', { className: 'fa fa-fw fa-map-marker' }),
 	                    _react2.default.createElement(
 	                        'span',
-	                        null,
-	                        ts.curTmp,
-	                        '℃ ',
-	                        ts.curCondTxt
-	                    )
+	                        { className: 'weather-city', style: cityStyle, onClick: this.cityClick.bind(this) },
+	                        this._convertName(ts.city)
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-control input-sm weather-city-input', value: cityName,
+	                        onChange: this.cityChange.bind(this),
+	                        onKeyDown: this.cityEdit.bind(this), style: inputStyle })
 	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    '明日 ',
-	                    ts.tomTempMin,
-	                    ' - ',
-	                    ts.tomTempMax,
-	                    '℃ ',
-	                    ts.tomCondTxt
-	                )
+	                hasCity ? renderCityWeather : noCityWeather
 	            );
 	        }
 	    }]);
@@ -21349,7 +21457,7 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".weather-container {\n  position: relative;\n  top: 10px;\n  left: 3%; }\n\n.weather-location {\n  position: absolute;\n  top: -105px;\n  right: 33px;\n  padding: 0;\n  margin: 0; }\n\n.weather-city {\n  margin: 0 .5em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 12px;\n  left: -1px; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: -1px;\n  top: 20px; }\n", ""]);
 
 	// exports
 
@@ -21389,7 +21497,7 @@
 
 
 	// module
-	exports.push([module.id, ".calendar-head {\n  position: relative;\n  top: 5px;\n  left: -29px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 38px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
+	exports.push([module.id, ".calendar-head {\n  position: relative;\n  top: 3px;\n  left: -29px;\n  margin-bottom: 18px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 38px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      transition: all 200ms ease-out;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
 
 	// exports
 

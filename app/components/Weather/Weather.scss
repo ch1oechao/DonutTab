@@ -1,3 +1,46 @@
 .weather-container {
-
+    position: relative;
+    top: 10px;
+    left: 3%;
 }
+
+.weather-location {
+    position: absolute;
+    top: -105px;
+    right: 33px;
+    padding: 0;
+    margin: 0;
+}
+
+.weather-city {
+    margin: 0 .5em;
+}
+
+.weather-city-input {
+    display: inline-block;
+    width: 80px;
+    height: 25px;
+    padding: 0;
+    margin: 0 .5em;
+}
+
+.weather-info {
+    position: relative;
+    top: 12px;
+    left: -1px;
+    p {
+        margin-bottom: 15px;
+    }
+    .label {
+        padding: .3em .5em;
+        margin-right: 1em;
+        line-height: 1em;
+    }
+}
+
+.weather-noinfo {
+    position: relative;
+    left: -1px;
+    top: 20px;
+}
+ 

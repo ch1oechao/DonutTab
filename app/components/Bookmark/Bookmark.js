@@ -190,7 +190,7 @@ export default class Bookmark extends React.Component {
                             <span className="book-title" 
                                 onClick={this.titleClick.bind(this)}
                                 style={titleStyle}> {bookName}</span>
-                            <input className="form-control book-input" 
+                            <input className="form-control book-input input-sm" 
                                 value={titleVal} style={inputStyle}
                                 onChange={this.titleChange.bind(this)}
                                 onKeyDown={this.titleEdit.bind(this)} />
