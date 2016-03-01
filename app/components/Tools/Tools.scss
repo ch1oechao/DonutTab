@@ -4,7 +4,7 @@
     position: absolute;
     left: 0;
     width: 100%;
-    height: 33%;
+    height: 225px;
     color: $primary-color-text;
     background-color: $primary-color;
     opacity: .9;
@@ -13,12 +13,17 @@
     z-index: 9;
 
     &.fold {
-        top: -33%;
+        top: -225px;
     }
 
     &.unfold {
         top: 0;
     }
+}
+
+.tools-content {
+    width: 97%;
+    margin: 0 auto;
 }
 
 .tools-btn {

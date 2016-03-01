@@ -1,44 +1,175 @@
 import React from 'react';
+import Weather from '../Weather/Weather.js';
 
 require('./Calendar.scss');
 
-const weeks = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
-const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const WEEKS = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default class Calendar extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+            curDateVal: this._getDateVal(),
+            curWeeks: [],
+            pickWeek: ''
+        };
+    }
 
-	componentDidMount() {
+    componentDidMount() {
 
-	}
+        let curWeeks = this._genCurWeek(this._getDateVal());
 
-	_getCurDate() {
+        this.setState({
+            curWeeks: curWeeks,
+            pickWeek: this._getDateVal().week
+        });
+
+    }
+
+    weekClick(ev) {
+        let pickWeek = +ev.target.getAttribute('data-week');
+        this.setState({
+            pickWeek: pickWeek
+        });
+    }
+
+    _getDateVal() {
         var self = this,
             curTime = new Date(),
-            week = curTime.getDay(),
-            day = this._convertTime(curTime.getDate()),
-            month = this._convertTime(curTime.getMonth() + 1),
-            year = curTime.getFullYear();
+            day = curTime.getDate(),
+            month = curTime.getMonth(),
+            year = curTime.getFullYear(),
+            week = curTime.getDay();
 
-        return [year, month, day].join(' / ') + ' ' + weeks[week];
+        return {
+            year: year,
+            month: month,
+            day: day,
+            week: week
+        };
     }
 
-    _convertTime(time) {
-        return time >= 10 ? time : '0' + time;
+    _getMonthLen(month, year) {
+        switch(+month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                return 31;
+            break;
+            case 4:
+            case 6:
+            case 9: 
+            case 11: 
+                return 30;
+            break;
+            case 2: 
+                if ((year % 100 === 0 && year % 400 === 0) 
+                    || (year % 100 !== 0 && year % 4 === 0)) {
+                    return 29;
+                } else {
+                    return 28;
+                }
+            break;
+        }
     }
 
-	render() {
+    _genCurWeek(time) {
+        let weekLen = 7,
+            curDay = time.day || this._getDateVal().day,
+            curWeek = time.week || this._getDateVal().week,
+            curMonth = time.month || this._getDateVal().month,
+            curYear = time.year || this._getDateVal().year,
+            weekArr = [],
+            foreDay = curDay - curWeek, 
+            afterDay = curDay,
+            firstDay = 1,
+            lastDay = this._getMonthLen(curMonth, curYear);
 
-		var date = this._getCurDate();
+        for (var i = 0; i < weekLen; i++) {
+            if (i < curWeek) {
+                if (foreDay > 0) {
+                    weekArr.push(foreDay);
+                    foreDay += 1;    
+                } else {
+                    weekArr.push('');
+                }
+            }
+            else if (i > curWeek) {
+                if (afterDay + weekLen - curWeek < lastDay) {
+                    afterDay += 1;
+                    weekArr.push(afterDay);
+                } else {
+                    weekArr.push(firstDay++);
+                }
+            }
+        }
 
-		return (
-			<div className="calendar-container">
-				<span>{date}</span>
-			</div>
-		);
-	}
+        weekArr.splice(curWeek, 0, curDay);
+
+        return weekArr;
+    }
+
+    _convertTime(time, type) {
+
+        var timeTmp = '';
+
+        switch(type) {
+            case 'week':
+                timeTmp = WEEKS[time];
+            break;
+            case 'month':
+                timeTmp = MONTHS[time];
+            break;
+            case 'hour':
+            case 'min':
+            case 'sec':
+            default:
+                timeTmp = time >= 10 ? time : '0' + time;
+            break;
+        }
+
+        return timeTmp;
+    }
+
+    render() {
+        var self = this,
+            curDateVal = this.state.curDateVal,
+            curWeeks = this.state.curWeeks,
+            pickWeek = this.state.pickWeek;
+
+        return (
+            <div className="calendar-container">
+                <h3 className="calendar-head">
+                    <i className="fa fa-fw fa-calendar-o"></i>
+                    <span className="calendar-title"> {curDateVal.year} {this._convertTime(curDateVal.month, 'month')}</span>
+                </h3>
+                <ul className="calendar-week clearfix">
+                    {WEEKS.map((item, idx) => {
+                        return (
+                            <li key={idx}>{item}</li>
+                        )
+                    })}
+                </ul>
+                <ul className="calendar-week clearfix">
+                    {curWeeks.map((item, idx) => {
+                        return (
+                            <li key={idx}>
+                                {item 
+                                    ? (<span className={pickWeek === idx ? 'active' : ''} data-week={idx} onClick={self.weekClick.bind(self)}>{item}</span>) 
+                                    : item
+                                }
+                            </li>
+                        )
+                    })}
+                </ul>
+                <Weather />
+            </div>
+        );
+    }
 }

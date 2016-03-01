@@ -1,0 +1,46 @@
+@import '../../assets/styles/palette.scss';
+
+.calendar-head {
+    position: relative;
+    top: 5px;
+    left: -29px;
+    .fa {
+        font-size: .8em;
+    }
+}
+
+.calendar-title {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-indent: .4em;
+}
+
+.calendar-week {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+        display: inline-block;
+        width: 38px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+
+        span {
+            display: inline-block;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &.active {
+                color: $primary-color;
+                background-color: $primary-color-text; 
+            }
+        }
+    }
+}
+
+ 

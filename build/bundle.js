@@ -20812,7 +20812,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  width: 100%;\n  height: 100%; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  left: 2%;\n  width: 95%;\n  height: 225px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
 
 	// exports
 
@@ -20840,10 +20840,6 @@
 	var _Calendar = __webpack_require__(170);
 
 	var _Calendar2 = _interopRequireDefault(_Calendar);
-
-	var _Weather = __webpack_require__(173);
-
-	var _Weather2 = _interopRequireDefault(_Weather);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20888,7 +20884,7 @@
 	                { className: toolConClass += isFold ? ' fold' : ' unfold' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'container' },
+	                    { className: 'tools-content' },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'row' },
@@ -20900,8 +20896,7 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'col-md-3' },
-	                            _react2.default.createElement(_Calendar2.default, null),
-	                            _react2.default.createElement(_Weather2.default, null)
+	                            _react2.default.createElement(_Calendar2.default, null)
 	                        )
 	                    )
 	                ),
@@ -20926,7 +20921,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20934,6 +20929,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _Weather = __webpack_require__(171);
+
+	var _Weather2 = _interopRequireDefault(_Weather);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20943,108 +20942,212 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(171);
+	__webpack_require__(174);
 
-	var weeks = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
-	var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	var WEEKS = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
+	var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 	var Calendar = function (_React$Component) {
-		_inherits(Calendar, _React$Component);
+	    _inherits(Calendar, _React$Component);
 
-		function Calendar(props) {
-			_classCallCheck(this, Calendar);
+	    function Calendar(props) {
+	        _classCallCheck(this, Calendar);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Calendar).call(this, props));
 
-			_this.state = {};
-			return _this;
-		}
+	        _this.state = {
+	            curDateVal: _this._getDateVal(),
+	            curWeeks: [],
+	            pickWeek: ''
+	        };
+	        return _this;
+	    }
 
-		_createClass(Calendar, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {}
-		}, {
-			key: '_getCurDate',
-			value: function _getCurDate() {
-				var self = this,
-				    curTime = new Date(),
-				    week = curTime.getDay(),
-				    day = this._convertTime(curTime.getDate()),
-				    month = this._convertTime(curTime.getMonth() + 1),
-				    year = curTime.getFullYear();
+	    _createClass(Calendar, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
 
-				return [year, month, day].join(' / ') + ' ' + weeks[week];
-			}
-		}, {
-			key: '_convertTime',
-			value: function _convertTime(time) {
-				return time >= 10 ? time : '0' + time;
-			}
-		}, {
-			key: 'render',
-			value: function render() {
+	            var curWeeks = this._genCurWeek(this._getDateVal());
 
-				var date = this._getCurDate();
+	            this.setState({
+	                curWeeks: curWeeks,
+	                pickWeek: this._getDateVal().week
+	            });
+	        }
+	    }, {
+	        key: 'weekClick',
+	        value: function weekClick(ev) {
+	            var pickWeek = +ev.target.getAttribute('data-week');
+	            this.setState({
+	                pickWeek: pickWeek
+	            });
+	        }
+	    }, {
+	        key: '_getDateVal',
+	        value: function _getDateVal() {
+	            var self = this,
+	                curTime = new Date(),
+	                day = curTime.getDate(),
+	                month = curTime.getMonth(),
+	                year = curTime.getFullYear(),
+	                week = curTime.getDay();
 
-				return _react2.default.createElement(
-					'div',
-					{ className: 'calendar-container' },
-					_react2.default.createElement(
-						'span',
-						null,
-						date
-					)
-				);
-			}
-		}]);
+	            return {
+	                year: year,
+	                month: month,
+	                day: day,
+	                week: week
+	            };
+	        }
+	    }, {
+	        key: '_getMonthLen',
+	        value: function _getMonthLen(month, year) {
+	            switch (+month) {
+	                case 1:
+	                case 3:
+	                case 5:
+	                case 7:
+	                case 8:
+	                case 10:
+	                case 12:
+	                    return 31;
+	                    break;
+	                case 4:
+	                case 6:
+	                case 9:
+	                case 11:
+	                    return 30;
+	                    break;
+	                case 2:
+	                    if (year % 100 === 0 && year % 400 === 0 || year % 100 !== 0 && year % 4 === 0) {
+	                        return 29;
+	                    } else {
+	                        return 28;
+	                    }
+	                    break;
+	            }
+	        }
+	    }, {
+	        key: '_genCurWeek',
+	        value: function _genCurWeek(time) {
+	            var weekLen = 7,
+	                curDay = time.day || this._getDateVal().day,
+	                curWeek = time.week || this._getDateVal().week,
+	                curMonth = time.month || this._getDateVal().month,
+	                curYear = time.year || this._getDateVal().year,
+	                weekArr = [],
+	                foreDay = curDay - curWeek,
+	                afterDay = curDay,
+	                firstDay = 1,
+	                lastDay = this._getMonthLen(curMonth, curYear);
 
-		return Calendar;
+	            for (var i = 0; i < weekLen; i++) {
+	                if (i < curWeek) {
+	                    if (foreDay > 0) {
+	                        weekArr.push(foreDay);
+	                        foreDay += 1;
+	                    } else {
+	                        weekArr.push('');
+	                    }
+	                } else if (i > curWeek) {
+	                    if (afterDay + weekLen - curWeek < lastDay) {
+	                        afterDay += 1;
+	                        weekArr.push(afterDay);
+	                    } else {
+	                        weekArr.push(firstDay++);
+	                    }
+	                }
+	            }
+
+	            weekArr.splice(curWeek, 0, curDay);
+
+	            return weekArr;
+	        }
+	    }, {
+	        key: '_convertTime',
+	        value: function _convertTime(time, type) {
+
+	            var timeTmp = '';
+
+	            switch (type) {
+	                case 'week':
+	                    timeTmp = WEEKS[time];
+	                    break;
+	                case 'month':
+	                    timeTmp = MONTHS[time];
+	                    break;
+	                case 'hour':
+	                case 'min':
+	                case 'sec':
+	                default:
+	                    timeTmp = time >= 10 ? time : '0' + time;
+	                    break;
+	            }
+
+	            return timeTmp;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var self = this,
+	                curDateVal = this.state.curDateVal,
+	                curWeeks = this.state.curWeeks,
+	                pickWeek = this.state.pickWeek;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'calendar-container' },
+	                _react2.default.createElement(
+	                    'h3',
+	                    { className: 'calendar-head' },
+	                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'calendar-title' },
+	                        ' ',
+	                        curDateVal.year,
+	                        ' ',
+	                        this._convertTime(curDateVal.month, 'month')
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'calendar-week clearfix' },
+	                    WEEKS.map(function (item, idx) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: idx },
+	                            item
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'calendar-week clearfix' },
+	                    curWeeks.map(function (item, idx) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: idx },
+	                            item ? _react2.default.createElement(
+	                                'span',
+	                                { className: pickWeek === idx ? 'active' : '', 'data-week': idx, onClick: self.weekClick.bind(self) },
+	                                item
+	                            ) : item
+	                        );
+	                    })
+	                ),
+	                _react2.default.createElement(_Weather2.default, null)
+	            );
+	        }
+	    }]);
+
+	    return Calendar;
 	}(_react2.default.Component);
 
 	exports.default = Calendar;
 
 /***/ },
 /* 171 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(172);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(165)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Calendar.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Calendar.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 172 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(164)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "", ""]);
-
-	// exports
-
-
-/***/ },
-/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21067,7 +21170,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	__webpack_require__(174);
+	__webpack_require__(172);
 
 	var WEATHER_API = 'https://api.heweather.com/x3/weather';
 	var CITY_API = 'https://api.heweather.com/x3/citylist';
@@ -21212,13 +21315,13 @@
 	exports.default = Weather;
 
 /***/ },
-/* 174 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(175);
+	var content = __webpack_require__(173);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(165)(content, {});
@@ -21238,7 +21341,7 @@
 	}
 
 /***/ },
-/* 175 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(164)();
@@ -21247,6 +21350,46 @@
 
 	// module
 	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(175);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(165)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Calendar.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./Calendar.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(164)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".calendar-head {\n  position: relative;\n  top: 5px;\n  left: -29px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 38px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
 
 	// exports
 
@@ -21286,7 +21429,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 33%;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -33%; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 225px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -225px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 97%;\n  margin: 0 auto; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 
