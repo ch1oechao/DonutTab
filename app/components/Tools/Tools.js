@@ -9,7 +9,7 @@ export default class Tools extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isFold: false
+			isFold: true
 		};
 	}
 

@@ -20860,7 +20860,7 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).call(this, props));
 
 	        _this.state = {
-	            isFold: false
+	            isFold: true
 	        };
 	        return _this;
 	    }
