@@ -19804,10 +19804,9 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'donut-tab-container', style: tabStyle },
+	                _react2.default.createElement(_Tools2.default, null),
 	                _react2.default.createElement(_Clock2.default, null),
 	                _react2.default.createElement(_SearchBox2.default, null),
-	                _react2.default.createElement(_Bookmark2.default, null),
-	                _react2.default.createElement(_Tools2.default, null),
 	                _react2.default.createElement(_Theme2.default, { onChangeTheme: this.handleCallback.bind(this) })
 	            );
 	        }
@@ -20502,7 +20501,6 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Bookmark).call(this, props));
 
 	        _this.state = {
-	            isFold: false,
 	            bookName: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
 	            titleVal: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
 	            titleStyle: showStyle,
@@ -20645,16 +20643,13 @@
 	            });
 	        }
 	    }, {
-	        key: 'btnClick',
-	        value: function btnClick(ev) {
-	            this.setState({
-	                isFold: !this.state.isFold
-	            });
-	        }
-	    }, {
-	        key: '_firstLetterToUpperCase',
-	        value: function _firstLetterToUpperCase(str) {
-	            return str.substring(0, 1).toUpperCase() + str.substring(1);
+	        key: '_convertName',
+	        value: function _convertName(str) {
+	            if (str.length > 9) {
+	                return str.substring(0, 1).toUpperCase() + str.substring(1, 6) + '...';
+	            } else {
+	                return str.substring(0, 1).toUpperCase() + str.substring(1);
+	            }
 	        }
 	    }, {
 	        key: 'render',
@@ -20662,8 +20657,6 @@
 	            var _this2 = this;
 
 	            var self = this,
-	                isFold = this.state.isFold,
-	                bookConClass = 'bookmark-container',
 	                bookName = this.state.bookName,
 	                titleVal = this.state.titleVal,
 	                titleStyle = this.state.titleStyle,
@@ -20674,61 +20667,57 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: bookConClass += isFold ? ' fold' : ' unfold' },
+	                { className: 'bookmark-container' },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'bookmark-content' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'container' },
+	                        { className: 'bookmark-head' },
 	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'bookmark-head' },
+	                            'h3',
+	                            { className: 'form-group has-success' },
+	                            _react2.default.createElement('i', { className: 'fa fa-bookmark-o fa-fw' }),
 	                            _react2.default.createElement(
-	                                'h3',
-	                                { className: 'form-group has-success' },
-	                                _react2.default.createElement('i', { className: 'fa fa-bookmark-o fa-fw' }),
-	                                _react2.default.createElement(
-	                                    'span',
-	                                    { className: 'book-title',
-	                                        onClick: this.titleClick.bind(this),
-	                                        style: titleStyle },
-	                                    ' ',
-	                                    bookName
-	                                ),
-	                                _react2.default.createElement('input', { className: 'form-control book-input',
-	                                    value: titleVal, style: inputStyle,
-	                                    onChange: this.titleChange.bind(this),
-	                                    onKeyDown: this.titleEdit.bind(this) })
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'book-body row' },
-	                            bookLinks.map(function (item, idx) {
-	                                var linkName = self._firstLetterToUpperCase(item.name);
-	                                return _react2.default.createElement(
-	                                    'div',
-	                                    { className: 'col-md-2', key: idx },
-	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h link-setting del', 'data-name': item.name, onClick: _this2.deleteLink.bind(_this2), title: 'DEL' }),
-	                                    _react2.default.createElement(
-	                                        'a',
-	                                        { href: item.link, className: 'book-link' },
-	                                        linkName
-	                                    ),
-	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v link-setting edit', 'data-name': item.name, onClick: _this2.editLink.bind(_this2), title: 'EDIT' })
-	                                );
-	                            }),
-	                            _react2.default.createElement(
+	                                'span',
+	                                { className: 'book-title',
+	                                    onClick: this.titleClick.bind(this),
+	                                    style: titleStyle },
+	                                ' ',
+	                                bookName
+	                            ),
+	                            _react2.default.createElement('input', { className: 'form-control book-input',
+	                                value: titleVal, style: inputStyle,
+	                                onChange: this.titleChange.bind(this),
+	                                onKeyDown: this.titleEdit.bind(this) })
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'book-body row' },
+	                        bookLinks.map(function (item, idx) {
+	                            var linkName = self._convertName(item.name);
+	                            return _react2.default.createElement(
 	                                'div',
-	                                { className: 'col-md-2' },
+	                                { className: 'col-md-2', key: idx },
+	                                _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h link-setting del', 'data-name': item.name, onClick: _this2.deleteLink.bind(_this2), title: 'DEL' }),
 	                                _react2.default.createElement(
 	                                    'a',
-	                                    { href: 'javascript:void(0)',
-	                                        className: 'book-link',
-	                                        onClick: this.addOpen.bind(this) },
-	                                    _react2.default.createElement('i', { className: 'fa fa-plus fa-fw' })
-	                                )
+	                                    { href: item.link, className: 'book-link' },
+	                                    linkName
+	                                ),
+	                                _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v link-setting edit', 'data-name': item.name, onClick: _this2.editLink.bind(_this2), title: 'EDIT' })
+	                            );
+	                        }),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-md-2' },
+	                            _react2.default.createElement(
+	                                'a',
+	                                { href: 'javascript:void(0)',
+	                                    className: 'book-link',
+	                                    onClick: this.addOpen.bind(this) },
+	                                _react2.default.createElement('i', { className: 'fa fa-plus fa-fw' })
 	                            )
 	                        )
 	                    )
@@ -20777,13 +20766,7 @@
 	                            { className: 'well-close', onClick: this.addClose.bind(this) },
 	                            _react2.default.createElement('i', { className: 'fa fa-times' })
 	                        )
-	                    ),
-	                    _react2.default.createElement('div', { className: 'well-wrap', onClick: this.addClose.bind(this) })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'bookmark-btn', onClick: this.btnClick.bind(this) },
-	                    _react2.default.createElement('i', { className: 'fa fa-star' })
+	                    )
 	                )
 	            );
 	        }
@@ -20829,7 +20812,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 33%;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .bookmark-container.fold {\n    top: -33%; }\n  .bookmark-container.unfold {\n    top: 0; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 75%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .well-wrap {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.5);\n    z-index: 9; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 15%; }\n    .book-edit .book-link-input.link {\n      width: 60%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n\n.bookmark-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .bookmark-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .bookmark-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  width: 100%;\n  height: 100%; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
 
 	// exports
 
@@ -20849,6 +20832,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _Bookmark = __webpack_require__(166);
+
+	var _Bookmark2 = _interopRequireDefault(_Bookmark);
 
 	var _Calendar = __webpack_require__(170);
 
@@ -20871,20 +20858,58 @@
 	var Tools = function (_React$Component) {
 	    _inherits(Tools, _React$Component);
 
-	    function Tools() {
+	    function Tools(props) {
 	        _classCallCheck(this, Tools);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).call(this, props));
+
+	        _this.state = {
+	            isFold: false
+	        };
+	        return _this;
 	    }
 
 	    _createClass(Tools, [{
+	        key: 'btnClick',
+	        value: function btnClick(ev) {
+	            this.setState({
+	                isFold: !this.state.isFold
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+
+	            var toolConClass = 'tools-container',
+	                isFold = this.state.isFold;
+
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'tools-container' },
-	                _react2.default.createElement(_Calendar2.default, null),
-	                _react2.default.createElement(_Weather2.default, null)
+	                { className: toolConClass += isFold ? ' fold' : ' unfold' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-md-9' },
+	                            _react2.default.createElement(_Bookmark2.default, null)
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-md-3' },
+	                            _react2.default.createElement(_Calendar2.default, null),
+	                            _react2.default.createElement(_Weather2.default, null)
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'tools-btn', onClick: this.btnClick.bind(this) },
+	                    _react2.default.createElement('i', { className: 'fa fa-star' })
+	                )
 	            );
 	        }
 	    }]);
@@ -21261,7 +21286,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n  z-index: 9; }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 33%;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -33%; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 

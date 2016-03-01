@@ -1,6 +1,61 @@
+@import '../../assets/styles/palette.scss';
+
 .tools-container {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-	z-index: 9;
+    left: 0;
+    width: 100%;
+    height: 33%;
+    color: $primary-color-text;
+    background-color: $primary-color;
+    opacity: .9;
+    box-shadow: 6px 0 15px $primary-text-color;
+    transition: top 300ms ease-out;
+    z-index: 9;
+
+    &.fold {
+        top: -33%;
+    }
+
+    &.unfold {
+        top: 0;
+    }
 }
+
+.tools-btn {
+    position: absolute;
+    bottom: -25px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 45px;
+    background-color: $primary-color;
+    cursor: pointer;
+
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 14px;
+        left: -15px;
+        height: 0;
+        border: 15px dashed transparent;
+        border-bottom-color: $primary-color;
+        transform: rotate(-45deg);
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        height: 0;
+        border: 15px dashed transparent;
+        border-top-color: $primary-color;
+        transform: rotate(90deg);
+    }
+
+}
+

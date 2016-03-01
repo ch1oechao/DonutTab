@@ -35,10 +35,9 @@ export default class Tab extends React.Component {
 
         return (
             <div className="donut-tab-container" style={tabStyle}>
+                <Tools />
                 <Clock />
                 <SearchBox />
-                <Bookmark />
-                <Tools />
                 <Theme onChangeTheme={this.handleCallback.bind(this)} />
             </div>
         );

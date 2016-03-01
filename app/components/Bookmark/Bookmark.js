@@ -34,7 +34,6 @@ export default class Bookmark extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFold: false,
             bookName: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
             titleVal: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
             titleStyle: showStyle,
@@ -163,22 +162,17 @@ export default class Bookmark extends React.Component {
         });
     }
 
-    btnClick(ev) {
-        this.setState({
-            isFold: !this.state.isFold
-        });
+    _convertName(str) {
+        if (str.length > 9) {
+            return str.substring(0, 1).toUpperCase() + str.substring(1, 6) + '...'; 
+        } else {
+            return str.substring(0, 1).toUpperCase() + str.substring(1);   
+        }
     }
-
-    _firstLetterToUpperCase(str) {
-        return str.substring(0, 1).toUpperCase() + str.substring(1);
-    }
-
 
     render() {
 
         var self = this,
-            isFold = this.state.isFold,
-            bookConClass = 'bookmark-container',
             bookName = this.state.bookName,
             titleVal = this.state.titleVal,
             titleStyle = this.state.titleStyle,
@@ -188,38 +182,35 @@ export default class Bookmark extends React.Component {
             addLinkVal = this.state.addLinkVal;
 
         return (
-            <div className={bookConClass += isFold ? ' fold' : ' unfold'}>
+            <div className="bookmark-container">
                 <div className="bookmark-content">
-                    <div className="container">
-                        <div className="bookmark-head">
-                            <h3 className="form-group has-success">
-                                <i className="fa fa-bookmark-o fa-fw"></i>
-                                <span className="book-title" 
-                                    onClick={this.titleClick.bind(this)}
-                                    style={titleStyle}> {bookName}</span>
-                                <input className="form-control book-input" 
-                                    value={titleVal} style={inputStyle}
-                                    onChange={this.titleChange.bind(this)}
-                                    onKeyDown={this.titleEdit.bind(this)} />
-                            </h3>
-                        </div>
-                        <div className="book-body row">
-                            {bookLinks.map((item, idx) => {
-                                var linkName = self._firstLetterToUpperCase(item.name);
-                                return (
-                                    <div className="col-md-2" key={idx}>
-                                        <i className="fa fa-fw fa-ellipsis-h link-setting del" data-name={item.name} onClick={this.deleteLink.bind(this)} title="DEL"></i>
-                                        <a href={item.link} className="book-link">{linkName}</a>
-                                        <i className="fa fa-fw fa-ellipsis-v link-setting edit" data-name={item.name} onClick={this.editLink.bind(this)} title="EDIT"></i>
-                                    </div>
-                                )
-                            })}
-                            <div className="col-md-2">
-                                <a href="javascript:void(0)" 
-                                    className="book-link"
-                                    onClick={this.addOpen.bind(this)}><i className="fa fa-plus fa-fw"></i></a>
-                            </div>
-
+                    <div className="bookmark-head">
+                        <h3 className="form-group has-success">
+                            <i className="fa fa-bookmark-o fa-fw"></i>
+                            <span className="book-title" 
+                                onClick={this.titleClick.bind(this)}
+                                style={titleStyle}> {bookName}</span>
+                            <input className="form-control book-input" 
+                                value={titleVal} style={inputStyle}
+                                onChange={this.titleChange.bind(this)}
+                                onKeyDown={this.titleEdit.bind(this)} />
+                        </h3>
+                    </div>
+                    <div className="book-body row">
+                        {bookLinks.map((item, idx) => {
+                            var linkName = self._convertName(item.name);
+                            return (
+                                <div className="col-md-2" key={idx}>
+                                    <i className="fa fa-fw fa-ellipsis-h link-setting del" data-name={item.name} onClick={this.deleteLink.bind(this)} title="DEL"></i>
+                                    <a href={item.link} className="book-link">{linkName}</a>
+                                    <i className="fa fa-fw fa-ellipsis-v link-setting edit" data-name={item.name} onClick={this.editLink.bind(this)} title="EDIT"></i>
+                                </div>
+                            )
+                        })}
+                        <div className="col-md-2">
+                            <a href="javascript:void(0)" 
+                                className="book-link"
+                                onClick={this.addOpen.bind(this)}><i className="fa fa-plus fa-fw"></i></a>
                         </div>
                     </div>
                 </div>
@@ -241,11 +232,7 @@ export default class Bookmark extends React.Component {
                                 onClick={this.addSave.bind(this)}>Save</a>
                         </div>
                         <span className="well-close" onClick={this.addClose.bind(this)}><i className="fa fa-times"></i></span>
-                    </div>
-                    <div className="well-wrap" onClick={this.addClose.bind(this)}></div>                                
-                </div>
-                <div className="bookmark-btn" onClick={this.btnClick.bind(this)}>
-                    <i className="fa fa-star"></i>
+                    </div>                                
                 </div>
             </div>
         );
