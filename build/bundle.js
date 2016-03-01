@@ -20502,7 +20502,7 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Bookmark).call(this, props));
 
 	        _this.state = {
-	            isFold: true,
+	            isFold: false,
 	            bookName: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
 	            titleVal: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
 	            titleStyle: showStyle,
@@ -20535,14 +20535,14 @@
 	    }, {
 	        key: 'titleChange',
 	        value: function titleChange(ev) {
-	            this.setState({ titleVal: ev.target.value ? ev.target.value : '-' });
+	            this.setState({ titleVal: ev.target.value });
 	        }
 	    }, {
 	        key: 'titleEdit',
 	        value: function titleEdit(ev) {
 	            if (+ev.keyCode === 13) {
 	                this.setState({
-	                    bookName: this.state.titleVal,
+	                    bookName: this.state.titleVal ? this.state.titleVal : 'Bookmark',
 	                    titleStyle: showStyle,
 	                    inputStyle: hideStyle
 	                });
@@ -20569,6 +20569,7 @@
 	        key: 'addOpen',
 	        value: function addOpen(ev) {
 	            $(this.refs.addPanel).show();
+	            this.refs.bookLabel.focus();
 	            this.renderAdd();
 	        }
 	    }, {
@@ -20578,15 +20579,19 @@
 	                newItem = {
 	                "name": this.state.addNameVal,
 	                "link": this.state.addLinkVal
-	            };
+	            },
+	                isFind = false;
 
 	            localBookLinks.map(function (item, idx) {
-	                if (item.name === newItem.name) {
-	                    localBookLinks.splice(idx, 1);
+	                if (item.name.toLowerCase() === newItem.name.toLowerCase() || item.link.toLowerCase() === newItem.link.toLowerCase()) {
+	                    isFind = true;
+	                    localBookLinks.splice(idx, 1, newItem);
 	                }
 	            });
 
-	            localBookLinks.push(newItem);
+	            if (!isFind && newItem.name && newItem.link) {
+	                localBookLinks.push(newItem);
+	            }
 
 	            this.renderLinks(localBookLinks);
 
@@ -20626,8 +20631,6 @@
 	    }, {
 	        key: 'editLink',
 	        value: function editLink(ev) {
-	            var _this2 = this;
-
 	            var self = this,
 	                editItem = {
 	                name: ev.target.getAttribute('data-name')
@@ -20636,11 +20639,8 @@
 
 	            links.map(function (item, idx) {
 	                if (item.name === editItem.name) {
-	                    self.addOpen();
-	                    _this2.setState({
-	                        addNameVal: item.name,
-	                        addLinkVal: item.link
-	                    });
+	                    self.addOpen(+idx);
+	                    self.renderAdd(item.name, item.link);
 	                }
 	            });
 	        }
@@ -20659,7 +20659,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this3 = this;
+	            var _this2 = this;
 
 	            var self = this,
 	                isFold = this.state.isFold,
@@ -20710,13 +20710,13 @@
 	                                return _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'col-md-2', key: idx },
-	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h del', 'data-name': item.name, onClick: _this3.deleteLink.bind(_this3), title: 'DEL' }),
+	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h link-setting del', 'data-name': item.name, onClick: _this2.deleteLink.bind(_this2), title: 'DEL' }),
 	                                    _react2.default.createElement(
 	                                        'a',
 	                                        { href: item.link, className: 'book-link' },
 	                                        linkName
 	                                    ),
-	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v edit', 'data-name': item.name, onClick: _this3.editLink.bind(_this3), title: 'EDIT' })
+	                                    _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v link-setting edit', 'data-name': item.name, onClick: _this2.editLink.bind(_this2), title: 'EDIT' })
 	                                );
 	                            }),
 	                            _react2.default.createElement(
@@ -20748,7 +20748,7 @@
 	                                _react2.default.createElement('i', { className: 'fa fa-tag' })
 	                            ),
 	                            _react2.default.createElement('input', { className: 'form-control book-link-input name',
-	                                value: addNameVal, id: 'bookLabel', onChange: this.addNameChange.bind(this) })
+	                                value: addNameVal, id: 'bookLabel', ref: 'bookLabel', onChange: this.addNameChange.bind(this) })
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
@@ -20777,7 +20777,8 @@
 	                            { className: 'well-close', onClick: this.addClose.bind(this) },
 	                            _react2.default.createElement('i', { className: 'fa fa-times' })
 	                        )
-	                    )
+	                    ),
+	                    _react2.default.createElement('div', { className: 'well-wrap', onClick: this.addClose.bind(this) })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -20828,7 +20829,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 33%;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .bookmark-container.fold {\n    top: -33%; }\n  .bookmark-container.unfold {\n    top: 0; }\n\n.book-body {\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .fa {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0; }\n    .book-body .fa:hover {\n      color: #009688;\n      cursor: pointer; }\n    .book-body .fa.del {\n      left: .5em; }\n    .book-body .fa.edit {\n      right: .5em; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 65%;\n  left: 50%;\n  width: 75%;\n  transform: translate(-50%, -50%); }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 15%; }\n    .book-edit .book-link-input.link {\n      width: 60%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 22px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n\n.bookmark-btn {\n  position: absolute;\n  top: 97.5%;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .bookmark-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .bookmark-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 33%;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .bookmark-container.fold {\n    top: -33%; }\n  .bookmark-container.unfold {\n    top: 0; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block;\n    width: 50%; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 75%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .well-wrap {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.5);\n    z-index: 9; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 15%; }\n    .book-edit .book-link-input.link {\n      width: 60%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n\n.bookmark-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .bookmark-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .bookmark-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 

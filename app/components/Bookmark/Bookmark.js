@@ -34,7 +34,7 @@ export default class Bookmark extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFold: true,
+            isFold: false,
             bookName: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
             titleVal: localStorage.getItem('curBookTitle') ? localStorage.getItem('curBookTitle') : 'Bookmark',
             titleStyle: showStyle,
@@ -62,13 +62,13 @@ export default class Bookmark extends React.Component {
     }
 
     titleChange(ev) {
-         this.setState({titleVal: ev.target.value ? ev.target.value : '-'});
+         this.setState({titleVal: ev.target.value});
     }
 
     titleEdit(ev) {
         if (+ev.keyCode === 13) {
             this.setState({
-                bookName: this.state.titleVal,
+                bookName: this.state.titleVal ? this.state.titleVal : 'Bookmark',
                 titleStyle: showStyle,
                 inputStyle: hideStyle
             });
@@ -92,6 +92,7 @@ export default class Bookmark extends React.Component {
 
     addOpen(ev) {
         $(this.refs.addPanel).show();
+        this.refs.bookLabel.focus();
         this.renderAdd();
     }
 
@@ -100,15 +101,20 @@ export default class Bookmark extends React.Component {
             newItem = {
                 "name": this.state.addNameVal,
                 "link": this.state.addLinkVal
-            };
+            },
+            isFind = false;
 
         localBookLinks.map((item, idx) => {
-            if (item.name === newItem.name) {
-                localBookLinks.splice(idx, 1)
+            if (item.name.toLowerCase() === newItem.name.toLowerCase()
+                || item.link.toLowerCase() === newItem.link.toLowerCase()) {
+                isFind = true;
+                localBookLinks.splice(idx, 1, newItem);
             }
         });
 
-        localBookLinks.push(newItem);
+        if (!isFind && newItem.name && newItem.link) {
+            localBookLinks.push(newItem);
+        }
 
         this.renderLinks(localBookLinks);
         
@@ -151,11 +157,8 @@ export default class Bookmark extends React.Component {
 
         links.map((item, idx) => {
             if (item.name === editItem.name) {
-                self.addOpen();
-                this.setState({
-                    addNameVal: item.name,
-                    addLinkVal: item.link
-                })
+                self.addOpen(+idx);
+                self.renderAdd(item.name, item.link);
             }
         });
     }
@@ -225,7 +228,7 @@ export default class Bookmark extends React.Component {
                         <div className="form-group">
                             <label className="book-label" htmlFor="bookLabel"><i className="fa fa-tag"></i></label>
                             <input className="form-control book-link-input name" 
-                                value={addNameVal} id="bookLabel" onChange={this.addNameChange.bind(this)} />
+                                value={addNameVal} id="bookLabel" ref="bookLabel" onChange={this.addNameChange.bind(this)} />
                         </div>
                         <div className="form-group">
                             <label className="book-label" htmlFor="bookLink"><i className="fa fa-link"></i></label>
@@ -238,7 +241,8 @@ export default class Bookmark extends React.Component {
                                 onClick={this.addSave.bind(this)}>Save</a>
                         </div>
                         <span className="well-close" onClick={this.addClose.bind(this)}><i className="fa fa-times"></i></span>
-                    </div>                                    
+                    </div>
+                    <div className="well-wrap" onClick={this.addClose.bind(this)}></div>                                
                 </div>
                 <div className="bookmark-btn" onClick={this.btnClick.bind(this)}>
                     <i className="fa fa-star"></i>
