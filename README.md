@@ -17,4 +17,7 @@ Chrome extension for new tab Based on ES6, React, Webpack
 自己挖的坑 跪着也要填完...
 
 
+![](images/DonutTab_02.png)
 
+
+![](images/DonutTab_01.png)
