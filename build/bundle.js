@@ -21570,7 +21570,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 225px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: 6px 0 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -225px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 97%;\n  margin: 0 auto; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 225px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: -1px 2px 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -225px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 97%;\n  margin: 0 auto; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 
@@ -21876,7 +21876,7 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  padding-top: 20%;\n  background-color: #CCC;\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  padding-top: 20%;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
 
 	// exports
 
