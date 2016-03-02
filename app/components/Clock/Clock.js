@@ -23,7 +23,7 @@ export default class Clock extends React.Component {
     _getCurTime() {
         var self = this,
             curTime = new Date(),
-            hour = curTime.getHours(),
+            hour = this._convertTime(curTime.getHours()),
             mins = this._convertTime(curTime.getMinutes()),
             secs = this._convertTime(curTime.getSeconds());
 

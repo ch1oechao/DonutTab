@@ -21007,7 +21007,7 @@
 	    }, {
 	        key: '_getMonthLen',
 	        value: function _getMonthLen(month, year) {
-	            switch (+month) {
+	            switch (month + 1) {
 	                case 1:
 	                case 3:
 	                case 5:
@@ -21037,8 +21037,8 @@
 	        value: function _genCurWeek(time) {
 	            var weekLen = 7,
 	                curDay = time.day || this._getDateVal().day,
-	                curWeek = time.week || this._getDateVal().week,
-	                curMonth = time.month || this._getDateVal().month,
+	                curWeek = +(time.week + '' || this._getDateVal().week),
+	                curMonth = +(time.month + '' || this._getDateVal().month),
 	                curYear = time.year || this._getDateVal().year,
 	                weekArr = [],
 	                beforeDay = curDay - curWeek,
@@ -21053,9 +21053,10 @@
 	                        beforeDay += 1;
 	                    } else {
 	                        weekArr.push('');
+	                        beforeDay += 1;
 	                    }
 	                } else if (i > curWeek) {
-	                    if (afterDay + weekLen - curWeek < lastDay) {
+	                    if (afterDay < lastDay) {
 	                        afterDay += 1;
 	                        weekArr.push(afterDay);
 	                    } else {
@@ -21596,7 +21597,7 @@
 	        value: function _getCurTime() {
 	            var self = this,
 	                curTime = new Date(),
-	                hour = curTime.getHours(),
+	                hour = this._convertTime(curTime.getHours()),
 	                mins = this._convertTime(curTime.getMinutes()),
 	                secs = this._convertTime(curTime.getSeconds());
 

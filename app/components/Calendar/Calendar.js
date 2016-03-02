@@ -56,7 +56,7 @@ export default class Calendar extends React.Component {
     }
 
     _getMonthLen(month, year) {
-        switch(+month) {
+        switch(month + 1) {
             case 1:
             case 3:
             case 5:
@@ -84,10 +84,10 @@ export default class Calendar extends React.Component {
     }
 
     _genCurWeek(time) {
-        let weekLen = 7,
+        var weekLen = 7,
             curDay = time.day || this._getDateVal().day,
-            curWeek = time.week || this._getDateVal().week,
-            curMonth = time.month || this._getDateVal().month,
+            curWeek = +(time.week + '' || this._getDateVal().week),
+            curMonth = +(time.month + '' || this._getDateVal().month),
             curYear = time.year || this._getDateVal().year,
             weekArr = [],
             beforeDay = curDay - curWeek, 
@@ -99,13 +99,14 @@ export default class Calendar extends React.Component {
             if (i < curWeek) {
                 if (beforeDay > 0) {
                     weekArr.push(beforeDay);
-                    beforeDay += 1;    
+                    beforeDay += 1;
                 } else {
                     weekArr.push('');
+                    beforeDay += 1;
                 }
             }
             else if (i > curWeek) {
-                if (afterDay + weekLen - curWeek < lastDay) {
+                if (afterDay < lastDay) {
                     afterDay += 1;
                     weekArr.push(afterDay);
                 } else {
