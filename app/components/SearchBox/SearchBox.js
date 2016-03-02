@@ -99,7 +99,7 @@ export default class SearchBox extends React.Component {
         return (
             <div className="searchbox-container">
                 <div className="searchbox-content">
-                    <form className="form-group  label-floating" name="searchForm" id="searchForm" action={curEngine.action}>
+                    <form className="form-group label-floating" name="searchForm" id="searchForm" action={curEngine.action}>
                         <div className="searchbox-input">
                             <label className="control-label" htmlFor={curEngine.name}>{label}</label>
                             <input type="text" value={value} id={curEngine.name} name={curEngine.name} className="form-control" 

@@ -1,5 +1,11 @@
 @import '../../assets/styles/palette.scss';
 
+.calendar-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .calendar-head {
     position: relative;
     top: 3px;
@@ -24,7 +30,7 @@
     list-style: none;
     li {
         display: inline-block;
-        width: 38px;
+        width: 40px;
         height: 22px;
         line-height: 22px;
         text-align: center;

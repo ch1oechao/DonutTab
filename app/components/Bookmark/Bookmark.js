@@ -196,8 +196,8 @@ export default class Bookmark extends React.Component {
         return (
             <div className="bookmark-container">
                 <div className="bookmark-content">
-                    <div className="bookmark-head">
-                        <h3 className="form-group has-success">
+                    <div className="bookmark-head row">
+                        <h3 className="form-group has-success col-md-5">
                             <i className="fa fa-bookmark-o fa-fw"></i>
                             <span className="book-title" 
                                 onClick={this.titleClick.bind(this)}

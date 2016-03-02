@@ -2,10 +2,9 @@
 
 .bookmark-container {
     position: relative;
-    top: -5px;
-    left: 2%;
+    left: 1%;
     width: 95%;
-    height: 225px;
+    height: 230px;
     padding-right: 3%;
     border-right: 1px dashed $primary-color-text;
 }
@@ -73,7 +72,6 @@
 
     h3 {
         display: inline-block;
-        width: 50%;
     }
 
     .book-input {

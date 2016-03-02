@@ -1,13 +1,13 @@
 .weather-container {
     position: relative;
-    top: 10px;
-    left: 3%;
+    margin: 0 auto;
+    width: 280px;
 }
 
 .weather-location {
     position: absolute;
-    top: -105px;
-    right: 33px;
+    top: -95px;
+    right: 3px;
     padding: 0;
     margin: 0;
 
@@ -30,8 +30,9 @@
 
 .weather-info {
     position: relative;
-    top: 12px;
+    top: 22px;
     left: -1px;
+    width: 100%;
     p {
         margin-bottom: 15px;
     }

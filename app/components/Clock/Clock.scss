@@ -1,5 +1,7 @@
 .clock-container {
-	margin-bottom: 5px;
+	position: absolute;
+	top: 48%;
+	transform: translateY(-50%);
     width: 100%;
     text-align: center;
     text-indent: -2.2em;
