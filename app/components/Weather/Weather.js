@@ -62,7 +62,7 @@ export default class Weather extends React.Component {
 
     cityClick(ev) {
         this.setState({
-            cityName: this.state.city,
+            cityVal: this.state.city,
             cityStyle: hideStyle,
             inputStyle: showStyle
         });
@@ -71,31 +71,39 @@ export default class Weather extends React.Component {
     cityEdit(ev) {
         if (+ev.keyCode === 13) {
             this.setState({
-                city: this.state.cityName,
+                city: this.state.cityVal,
                 cityStyle: showStyle,
                 inputStyle: hideStyle
             });
 
-            localStorage.setItem('curCity', this.state.cityName);
+            localStorage.setItem('curCity', this.state.cityVal);
 
-            this.renderWeather(this.state.cityName);
+            this.renderWeather(this.state.cityVal);
         }
     }
 
     cityChange(ev) {
-        this.setState({cityName: ev.target.value});
+        this.setState({cityVal: ev.target.value});
+    }
+
+    cityUnchange(ev) {
+        this.setState({
+            cityVal: '',
+            cityStyle: showStyle,
+            inputStyle: hideStyle
+        })
     }
 
     _getPickWeather(idx) {
         return this.state.foreWs[idx];
     }
 
-    _getCityWeather(cityName, callback) {
+    _getCityWeather(cityVal, callback) {
         
         $.ajax({
             url: WEATHER_API,
             data: {
-                city: cityName,
+                city: cityVal,
                 key: KEY
             },
             success: (data) => {
@@ -162,7 +170,7 @@ export default class Weather extends React.Component {
 
         var ts = this.state,
             hasCity = ts.hasCity,
-            cityName = ts.cityName,
+            cityVal = ts.cityVal,
             curPickW = ts.curPickWeather,
             cityStyle = ts.cityStyle,
             inputStyle = ts.inputStyle,
@@ -188,9 +196,10 @@ export default class Weather extends React.Component {
                 <div className="weather-location form-group has-success">
                    <i className="fa fa-fw fa-map-marker"></i>
                    <span className="weather-city" style={cityStyle} onClick={this.cityClick.bind(this)}>{this._convertName(ts.city)}</span>
-                   <input className="form-control input-sm weather-city-input" value={cityName} 
+                   <input className="form-control input-sm weather-city-input" value={cityVal} style={inputStyle}
                         onChange={this.cityChange.bind(this)} 
-                        onKeyDown={this.cityEdit.bind(this)} style={inputStyle} />
+                        onKeyDown={this.cityEdit.bind(this)}
+                        onBlur={this.cityUnchange.bind(this)}  />
                 </div>
                 {hasCity ? renderCityWeather : noCityWeather}
             </div>

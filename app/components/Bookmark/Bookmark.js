@@ -52,6 +52,7 @@ export default class Bookmark extends React.Component {
         return JSON.parse(localStorage.getItem('curBookLinks'));
     }
 
+    // Click 
     titleClick(ev) {
         this.setState({
             titleVal: this.state.bookName,
@@ -60,10 +61,12 @@ export default class Bookmark extends React.Component {
         })
     }
 
+    // Change
     titleChange(ev) {
          this.setState({titleVal: ev.target.value});
     }
 
+    // KeyDown 
     titleEdit(ev) {
         if (+ev.keyCode === 13) {
             this.setState({
@@ -73,6 +76,15 @@ export default class Bookmark extends React.Component {
             });
             localStorage.setItem('curBookTitle', this.state.titleVal);
         }
+    }
+
+    // Blur
+    titleUnchange(ev) {
+        this.setState({
+            titleVal: '',
+            titleStyle: showStyle,
+            inputStyle: hideStyle
+        })
     }
 
     renderAdd(name, link) {
@@ -193,7 +205,8 @@ export default class Bookmark extends React.Component {
                             <input className="form-control book-input input-sm" 
                                 value={titleVal} style={inputStyle}
                                 onChange={this.titleChange.bind(this)}
-                                onKeyDown={this.titleEdit.bind(this)} />
+                                onKeyDown={this.titleEdit.bind(this)}
+                                onBlur={this.titleUnchange.bind(this)} />
                         </h3>
                     </div>
                     <div className="book-body row">

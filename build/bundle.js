@@ -20125,7 +20125,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 52.5%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: #000; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n  .searchbox-container .form-control {\n    color: currentColor; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 52.5%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: inherit; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
 
 	// exports
 
@@ -20521,6 +20521,9 @@
 	            }
 	            return JSON.parse(localStorage.getItem('curBookLinks'));
 	        }
+
+	        // Click
+
 	    }, {
 	        key: 'titleClick',
 	        value: function titleClick(ev) {
@@ -20530,11 +20533,17 @@
 	                inputStyle: showStyle
 	            });
 	        }
+
+	        // Change
+
 	    }, {
 	        key: 'titleChange',
 	        value: function titleChange(ev) {
 	            this.setState({ titleVal: ev.target.value });
 	        }
+
+	        // KeyDown
+
 	    }, {
 	        key: 'titleEdit',
 	        value: function titleEdit(ev) {
@@ -20546,6 +20555,18 @@
 	                });
 	                localStorage.setItem('curBookTitle', this.state.titleVal);
 	            }
+	        }
+
+	        // Blur
+
+	    }, {
+	        key: 'titleUnchange',
+	        value: function titleUnchange(ev) {
+	            this.setState({
+	                titleVal: '',
+	                titleStyle: showStyle,
+	                inputStyle: hideStyle
+	            });
 	        }
 	    }, {
 	        key: 'renderAdd',
@@ -20689,7 +20710,8 @@
 	                            _react2.default.createElement('input', { className: 'form-control book-input input-sm',
 	                                value: titleVal, style: inputStyle,
 	                                onChange: this.titleChange.bind(this),
-	                                onKeyDown: this.titleEdit.bind(this) })
+	                                onKeyDown: this.titleEdit.bind(this),
+	                                onBlur: this.titleUnchange.bind(this) })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -21249,7 +21271,7 @@
 	        key: 'cityClick',
 	        value: function cityClick(ev) {
 	            this.setState({
-	                cityName: this.state.city,
+	                cityVal: this.state.city,
 	                cityStyle: hideStyle,
 	                inputStyle: showStyle
 	            });
@@ -21259,20 +21281,29 @@
 	        value: function cityEdit(ev) {
 	            if (+ev.keyCode === 13) {
 	                this.setState({
-	                    city: this.state.cityName,
+	                    city: this.state.cityVal,
 	                    cityStyle: showStyle,
 	                    inputStyle: hideStyle
 	                });
 
-	                localStorage.setItem('curCity', this.state.cityName);
+	                localStorage.setItem('curCity', this.state.cityVal);
 
-	                this.renderWeather(this.state.cityName);
+	                this.renderWeather(this.state.cityVal);
 	            }
 	        }
 	    }, {
 	        key: 'cityChange',
 	        value: function cityChange(ev) {
-	            this.setState({ cityName: ev.target.value });
+	            this.setState({ cityVal: ev.target.value });
+	        }
+	    }, {
+	        key: 'cityUnchange',
+	        value: function cityUnchange(ev) {
+	            this.setState({
+	                cityVal: '',
+	                cityStyle: showStyle,
+	                inputStyle: hideStyle
+	            });
 	        }
 	    }, {
 	        key: '_getPickWeather',
@@ -21281,12 +21312,12 @@
 	        }
 	    }, {
 	        key: '_getCityWeather',
-	        value: function _getCityWeather(cityName, callback) {
+	        value: function _getCityWeather(cityVal, callback) {
 
 	            $.ajax({
 	                url: WEATHER_API,
 	                data: {
-	                    city: cityName,
+	                    city: cityVal,
 	                    key: KEY
 	                },
 	                success: function success(data) {
@@ -21356,7 +21387,7 @@
 
 	            var ts = this.state,
 	                hasCity = ts.hasCity,
-	                cityName = ts.cityName,
+	                cityVal = ts.cityVal,
 	                curPickW = ts.curPickWeather,
 	                cityStyle = ts.cityStyle,
 	                inputStyle = ts.inputStyle,
@@ -21409,9 +21440,10 @@
 	                        { className: 'weather-city', style: cityStyle, onClick: this.cityClick.bind(this) },
 	                        this._convertName(ts.city)
 	                    ),
-	                    _react2.default.createElement('input', { className: 'form-control input-sm weather-city-input', value: cityName,
+	                    _react2.default.createElement('input', { className: 'form-control input-sm weather-city-input', value: cityVal, style: inputStyle,
 	                        onChange: this.cityChange.bind(this),
-	                        onKeyDown: this.cityEdit.bind(this), style: inputStyle })
+	                        onKeyDown: this.cityEdit.bind(this),
+	                        onBlur: this.cityUnchange.bind(this) })
 	                ),
 	                hasCity ? renderCityWeather : noCityWeather
 	            );
@@ -21458,7 +21490,7 @@
 
 
 	// module
-	exports.push([module.id, ".weather-container {\n  position: relative;\n  top: 10px;\n  left: 3%; }\n\n.weather-location {\n  position: absolute;\n  top: -105px;\n  right: 33px;\n  padding: 0;\n  margin: 0; }\n\n.weather-city {\n  margin: 0 .5em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 12px;\n  left: -1px; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: -1px;\n  top: 20px; }\n", ""]);
+	exports.push([module.id, ".weather-container {\n  position: relative;\n  top: 10px;\n  left: 3%; }\n\n.weather-location {\n  position: absolute;\n  top: -105px;\n  right: 33px;\n  padding: 0;\n  margin: 0; }\n  .weather-location .form-control {\n    color: #FFF; }\n\n.weather-city {\n  margin: 0 .5em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 12px;\n  left: -1px; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: -1px;\n  top: 20px; }\n", ""]);
 
 	// exports
 
