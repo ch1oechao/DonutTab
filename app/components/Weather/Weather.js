@@ -29,10 +29,6 @@ export default class Weather extends React.Component {
 
     componentDidMount() {
         this.renderWeather(this.state.city);
-
-        setInterval(() => {
-            this.renderWeather(this.state.city);
-        }, 1000 * 60 / 60);
     }
 
     renderWeather(city) {
@@ -105,6 +101,14 @@ export default class Weather extends React.Component {
     _getCityWeather(cityVal, callback) {
 
         var self = this;
+
+        this.setState({
+            hasCity: true,
+            curTmp: '',
+            curCondTxt: 'Loading...',
+            foreWs: [],
+            curPickWeather: {}
+        });
         
         $.ajax({
             url: WEATHER_API,
@@ -116,11 +120,6 @@ export default class Weather extends React.Component {
                 return data;
             },
             error: (err) => {
-
-                setInterval(() => {
-                    return self.renderWeather(self.state.city);    
-                }, 1000 * 5 / 60);
-
                 throw err;
             }
 
@@ -187,7 +186,7 @@ export default class Weather extends React.Component {
             inputStyle = ts.inputStyle,
             foreDate = curPickW ? curPickW.date.substring(5).split('-').join(' / ') : '';
 
-        let noCityWeather = (<span className="weather-noinfo">There is no {this._convertName(ts.city)}'s weather info.</span>);
+        let noCityWeather = (<span className="weather-noinfo">Sorry. There's no {this._convertName(ts.city)}'s weather info.</span>);
 
         let renderCityWeather = (
                 <div className="weather-info">

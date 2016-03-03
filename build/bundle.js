@@ -20722,13 +20722,13 @@
 	                            return _react2.default.createElement(
 	                                'div',
 	                                { className: 'col-md-2', key: idx },
-	                                _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h link-setting del', 'data-name': item.name, onClick: _this2.deleteLink.bind(_this2), title: 'DEL' }),
+	                                _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-h link-setting del', 'data-name': item.name, onClick: _this2.deleteLink.bind(_this2) }),
 	                                _react2.default.createElement(
 	                                    'a',
 	                                    { href: item.link, className: 'book-link' },
 	                                    linkName
 	                                ),
-	                                _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v link-setting edit', 'data-name': item.name, onClick: _this2.editLink.bind(_this2), title: 'EDIT' })
+	                                _react2.default.createElement('i', { className: 'fa fa-fw fa-ellipsis-v link-setting edit', 'data-name': item.name, onClick: _this2.editLink.bind(_this2) })
 	                            );
 	                        }),
 	                        _react2.default.createElement(
@@ -20834,7 +20834,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  left: 1%;\n  width: 95%;\n  height: 230px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n@media (max-width: 1120px) {\n  .bookmark-container {\n    width: 98%;\n    border: none; } }\n\n@media (max-width: 960px) {\n  .bookmark-container {\n    position: relative;\n    left: 1%;\n    width: 100%;\n    height: 230px;\n    border: none; } }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em;\n    height: 25px; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  left: 1%;\n  width: 95%;\n  height: 230px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n@media (max-width: 1120px) {\n  .bookmark-container {\n    width: 98%;\n    border: none; } }\n\n@media (max-width: 960px) {\n  .bookmark-container {\n    position: relative;\n    left: 1%;\n    width: 100%;\n    height: 230px;\n    border: none; } }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n        .book-body .link-setting.del:hover::after {\n          display: inline-block; }\n      .book-body .link-setting.del::after {\n        content: 'DEL';\n        display: none;\n        position: relative;\n        left: -.5em;\n        width: 36px;\n        height: 1.5em;\n        line-height: 1.5em;\n        text-align: center;\n        color: #FFFFFF;\n        background: rgba(0, 0, 0, 0.3);\n        border-radius: 2px; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n        .book-body .link-setting.edit:hover::after {\n          display: inline-block; }\n      .book-body .link-setting.edit::after {\n        content: 'EDIT';\n        display: none;\n        position: relative;\n        left: -2em;\n        transform: translateX(50%);\n        width: 40px;\n        height: 1.5em;\n        line-height: 1.5em;\n        text-align: center;\n        color: #FFFFFF;\n        background: rgba(0, 0, 0, 0.3);\n        border-radius: 2px; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block; }\n    .bookmark-head h3:hover::after {\n      display: inline-block; }\n    .bookmark-head h3::after {\n      content: 'Click to edit it. & Press ENTER to save it.';\n      display: none;\n      position: absolute;\n      top: 2.35em;\n      left: 4.2em;\n      padding: 0 1em;\n      height: 1.85em;\n      line-height: 1.85em;\n      text-align: center;\n      font-size: .45em;\n      color: #FFFFFF;\n      background: rgba(0, 0, 0, 0.3);\n      border-radius: 2px; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em;\n    height: 25px; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
 
 	// exports
 
@@ -20882,7 +20882,7 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).call(this, props));
 
 	        _this.state = {
-	            isFold: true
+	            isFold: false
 	        };
 	        return _this;
 	    }
@@ -21135,7 +21135,13 @@
 	                        ' ',
 	                        curDateVal.year,
 	                        ' ',
-	                        this._convertTime(curDateVal.month, 'month')
+	                        this._convertTime(curDateVal.month, 'month'),
+	                        ' ',
+	                        _react2.default.createElement(
+	                            'small',
+	                            null,
+	                            this._convertTime(curDateVal.day, 'day')
+	                        )
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -21233,34 +21239,28 @@
 	    _createClass(Weather, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var _this2 = this;
-
 	            this.renderWeather(this.state.city);
-
-	            setInterval(function () {
-	                _this2.renderWeather(_this2.state.city);
-	            }, 1000 * 60 / 60);
 	        }
 	    }, {
 	        key: 'renderWeather',
 	        value: function renderWeather(city) {
-	            var _this3 = this;
+	            var _this2 = this;
 
 	            this._getCityWeather(city, function (data) {
 
 	                if (!data) {
-	                    _this3.setState({
+	                    _this2.setState({
 	                        hasCity: false
 	                    });
 	                    return;
 	                }
 
-	                _this3.setState({
+	                _this2.setState({
 	                    hasCity: true,
 	                    curTmp: data.curW.tmp,
 	                    curCondTxt: data.curW.cond.txt,
 	                    foreWs: data.foreWs,
-	                    curPickWeather: data.foreWs[_this3.props.pickIndex]
+	                    curPickWeather: data.foreWs[_this2.props.pickIndex]
 	                });
 	            });
 	        }
@@ -21322,6 +21322,14 @@
 
 	            var self = this;
 
+	            this.setState({
+	                hasCity: true,
+	                curTmp: '',
+	                curCondTxt: 'Loading...',
+	                foreWs: [],
+	                curPickWeather: {}
+	            });
+
 	            $.ajax({
 	                url: WEATHER_API,
 	                data: {
@@ -21332,11 +21340,6 @@
 	                    return data;
 	                },
 	                error: function error(err) {
-
-	                    setInterval(function () {
-	                        return self.renderWeather(self.state.city);
-	                    }, 1000 * 5 / 60);
-
 	                    throw err;
 	                }
 
@@ -21409,7 +21412,7 @@
 	            var noCityWeather = _react2.default.createElement(
 	                'span',
 	                { className: 'weather-noinfo' },
-	                'There is no ',
+	                'Sorry. There\'s no ',
 	                this._convertName(ts.city),
 	                '\'s weather info.'
 	            );
@@ -21503,7 +21506,7 @@
 
 
 	// module
-	exports.push([module.id, ".weather-container {\n  position: relative;\n  margin: 0 auto;\n  width: 280px; }\n\n.weather-location {\n  position: absolute;\n  top: -95px;\n  right: 3px;\n  padding: 0;\n  margin: 0; }\n  .weather-location .form-control {\n    color: #FFF; }\n\n.weather-city {\n  margin: 0 .5em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 22px;\n  left: -1px;\n  width: 100%; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: -1px;\n  top: 20px; }\n", ""]);
+	exports.push([module.id, ".weather-container {\n  position: relative;\n  margin: 0 auto;\n  width: 280px; }\n\n.weather-location {\n  position: absolute;\n  top: -95px;\n  right: 3px;\n  padding: 0;\n  margin: 0; }\n  .weather-location .form-control {\n    color: #FFF; }\n  .weather-location:hover::after {\n    display: inline-block; }\n  .weather-location::after {\n    content: 'Click to edit it. & Press ENTER to save it.';\n    display: none;\n    position: absolute;\n    top: -2.35em;\n    right: 0;\n    width: 250px;\n    height: 1.85em;\n    line-height: 1.85em;\n    text-align: center;\n    font-size: .45em;\n    color: #FFF;\n    background: rgba(0, 0, 0, 0.3);\n    border-radius: 2px; }\n\n.weather-city {\n  margin: 0 .5em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 22px;\n  left: -1px;\n  width: 100%; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: 5px;\n  top: 35px; }\n", ""]);
 
 	// exports
 
@@ -21543,7 +21546,7 @@
 
 
 	// module
-	exports.push([module.id, ".calendar-container {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.calendar-head {\n  position: relative;\n  top: 3px;\n  left: -29px;\n  margin-bottom: 18px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 40px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      transition: all 200ms ease-out;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
+	exports.push([module.id, ".calendar-container {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.calendar-head {\n  position: relative;\n  top: 3px;\n  left: -29px;\n  margin-bottom: 18px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n  .calendar-title small {\n    color: inherit; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 40px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      transition: all 200ms ease-out;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
 
 	// exports
 

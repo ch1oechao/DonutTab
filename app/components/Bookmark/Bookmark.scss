@@ -72,6 +72,23 @@
             left: .5em;
             &:hover {
                 color: $danger-text-color;
+                &::after {
+                    display: inline-block;
+                }
+            }
+
+            &::after {
+                content: 'DEL';
+                display: none;
+                position: relative;
+                left: -.5em;
+                width: 36px;
+                height: 1.5em;
+                line-height: 1.5em;
+                text-align: center;
+                color: $primary-color-text;
+                background: rgba(0, 0, 0, .3);
+                border-radius: 2px;
             }
         }
 
@@ -79,6 +96,24 @@
             right: .5em;
             &:hover {
                 color: $primary-color;
+                &::after {
+                    display: inline-block;
+                }
+            }
+
+            &::after {
+                content: 'EDIT';
+                display: none;
+                position: relative;
+                left: -2em;
+                transform: translateX(50%);
+                width: 40px;
+                height: 1.5em;
+                line-height: 1.5em;
+                text-align: center;
+                color: $primary-color-text;
+                background: rgba(0, 0, 0, .3);
+                border-radius: 2px;
             }
         }
     }
@@ -90,6 +125,28 @@
 
     h3 {
         display: inline-block;
+
+        &:hover {
+            &::after {
+                display: inline-block;
+            }
+        }
+
+        &::after {
+            content: 'Click to edit it. & Press ENTER to save it.';
+            display: none;
+            position: absolute;
+            top: 2.35em;
+            left: 4.2em;
+            padding: 0 1em;
+            height: 1.85em;
+            line-height: 1.85em;
+            text-align: center;
+            font-size: .45em;
+            color: $primary-color-text;
+            background: rgba(0, 0, 0, .3);
+            border-radius: 2px;
+        }
     }
 
     .book-input {

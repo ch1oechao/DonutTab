@@ -152,7 +152,7 @@ export default class Calendar extends React.Component {
             <div className="calendar-container">
                 <h3 className="calendar-head">
                     <i className="fa fa-fw fa-calendar-o"></i>
-                    <span className="calendar-title"> {curDateVal.year} {this._convertTime(curDateVal.month, 'month')}</span>
+                    <span className="calendar-title"> {curDateVal.year} {this._convertTime(curDateVal.month, 'month')} <small>{this._convertTime(curDateVal.day, 'day')}</small></span>
                 </h3>
                 <ul className="calendar-week clearfix">
                     {WEEKS.map((item, idx) => {

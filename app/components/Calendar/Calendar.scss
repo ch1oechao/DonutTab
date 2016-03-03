@@ -22,6 +22,10 @@
     display: inline-block;
     margin-bottom: 10px;
     text-indent: .4em;
+
+    small {
+        color: inherit;
+    }
 }
 
 .calendar-week {

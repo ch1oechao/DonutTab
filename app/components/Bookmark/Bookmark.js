@@ -214,9 +214,9 @@ export default class Bookmark extends React.Component {
                             var linkName = self._convertName(item.name);
                             return (
                                 <div className="col-md-2" key={idx}>
-                                    <i className="fa fa-fw fa-ellipsis-h link-setting del" data-name={item.name} onClick={this.deleteLink.bind(this)} title="DEL"></i>
+                                    <i className="fa fa-fw fa-ellipsis-h link-setting del" data-name={item.name} onClick={this.deleteLink.bind(this)}></i>
                                     <a href={item.link} className="book-link">{linkName}</a>
-                                    <i className="fa fa-fw fa-ellipsis-v link-setting edit" data-name={item.name} onClick={this.editLink.bind(this)} title="EDIT"></i>
+                                    <i className="fa fa-fw fa-ellipsis-v link-setting edit" data-name={item.name} onClick={this.editLink.bind(this)}></i>
                                 </div>
                             )
                         })}

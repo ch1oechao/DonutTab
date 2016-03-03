@@ -14,6 +14,29 @@
     .form-control {
         color: #FFF;
     }
+
+    &:hover {
+        &::after {
+            display: inline-block;
+        }
+    }
+
+    &::after {
+        content: 'Click to edit it. & Press ENTER to save it.';
+        display: none;
+        position: absolute;
+        top: -2.35em;
+        right: 0;
+        width: 250px;
+        height: 1.85em;
+        line-height: 1.85em;
+        text-align: center;
+        font-size: .45em;
+        color: #FFF;
+        background: rgba(0, 0, 0, .3);
+        border-radius: 2px;
+    }
+
 }
 
 .weather-city {
@@ -45,7 +68,7 @@
 
 .weather-noinfo {
     position: relative;
-    left: -1px;
-    top: 20px;
+    left: 5px;
+    top: 35px;
 }
  
