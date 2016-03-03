@@ -12,5 +12,12 @@
     background-size: cover;
     overflow: hidden;
     z-index: 0;
-} 
- 
+
+    &.dark {
+        color: #212121;
+    }
+
+    &.light {
+        color: #FFF;
+    }
+}

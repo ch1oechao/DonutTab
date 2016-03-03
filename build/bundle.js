@@ -19768,7 +19768,7 @@
 	__webpack_require__(184);
 
 	// Thanks for ihuan.me
-	var BING_IMG = 'http://ihuan.me/bing';
+	var BG_LINK = 'http://7xr6bj.com1.z0.glb.clouddn.com/';
 
 	var Tab = function (_React$Component) {
 	    _inherits(Tab, _React$Component);
@@ -19780,30 +19780,40 @@
 
 	        _this.state = {
 	            tabStyle: {
-	                backgroundImage: 'url(' + BING_IMG + ')'
-	            }
+	                backgroundImage: 'url(' + BG_LINK + _this._genRandomNum() + '.jpg)'
+	            },
+	            tabClass: 'donut-tab-container light'
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Tab, [{
+	        key: '_genRandomNum',
+	        value: function _genRandomNum() {
+	            var randomNum = Math.floor(Math.random() * 100) + 1;
+
+	            this.setState({
+	                randomNum: randomNum
+	            });
+
+	            return randomNum < 10 ? '0' + randomNum : randomNum;
+	        }
+	    }, {
 	        key: 'handleCallback',
 	        value: function handleCallback(res) {
 	            this.setState({
-	                tabStyle: {
-	                    backgroundImage: 'url(' + BING_IMG + ')',
-	                    color: res ? '#212121' : '#FFF'
-	                }
+	                tabClass: res ? 'donut-tab-container dark' : 'donut-tab-container light'
 	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var tabStyle = this.state.tabStyle;
+	            var tabStyle = this.state.tabStyle,
+	                tabClass = this.state.tabClass;
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'donut-tab-container', style: tabStyle },
+	                { className: tabClass, style: tabStyle },
 	                _react2.default.createElement(_Tools2.default, null),
 	                _react2.default.createElement(_Clock2.default, null),
 	                _react2.default.createElement(_SearchBox2.default, null),
@@ -20882,7 +20892,7 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Tools).call(this, props));
 
 	        _this.state = {
-	            isFold: false
+	            isFold: true
 	        };
 	        return _this;
 	    }
@@ -21753,10 +21763,10 @@
 	    _react2.default.createElement('i', { className: 'fa fa-moon-o' })
 	);
 	var LIGHT_STYLE = {
-	    background: 'rgba(255, 255, 255, .16)'
+	    background: 'linear-gradient(to bottom, rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .3), rgba(255, 255, 255, .1) 100%)'
 	};
 	var DARK_STYLE = {
-	    background: 'rgba(0, 0, 0, .16)'
+	    background: 'linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, .3) 100%)'
 	};
 
 	var Theme = function (_React$Component) {
@@ -21892,7 +21902,7 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  min-width: 800px;\n  min-height: 480px;\n  padding-top: 245px;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  overflow: hidden;\n  z-index: 0; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  min-width: 800px;\n  min-height: 480px;\n  padding-top: 245px;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  overflow: hidden;\n  z-index: 0; }\n  .donut-tab-container.dark {\n    color: #212121; }\n  .donut-tab-container.light {\n    color: #FFF; }\n", ""]);
 
 	// exports
 

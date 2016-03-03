@@ -13,10 +13,10 @@ const DARK_ICON = (
         </span>
     );
 const LIGHT_STYLE = {
-    background: 'rgba(255, 255, 255, .16)'
+    background: 'linear-gradient(to bottom, rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .3), rgba(255, 255, 255, .1) 100%)'
 }
 const DARK_STYLE = {
-    background: 'rgba(0, 0, 0, .16)'
+    background: 'linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, .3) 100%)'
 }
 
 export default class Theme extends React.Component {
