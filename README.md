@@ -1,18 +1,13 @@
-# DonutTab
+# [DonutTab](https://chrome.google.com/webstore/detail/donuttab/dhidagleggfbfandlmbbifflkolokomg)
 
 Chrome extension for new tab Based on ES6, React, Webpack
 
-### Install the local Chrome extension
+### Install from Chrome Webstore
 
-- Download the package
+[DonutTab](https://chrome.google.com/webstore/detail/donuttab/dhidagleggfbfandlmbbifflkolokomg)
 
-		cd /somewhere
 
-		git clone git@github.com:zchen9/DonutTab.git
-	
-- Find Chrome Setting
-	
-![](images/Chrome_setting.png)
+![](images/Chrome_extension.png)
 
 
 ### Preview
