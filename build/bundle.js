@@ -20125,7 +20125,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchbox-container {\n  position: absolute;\n  top: 62.5%;\n  transform: translateY(-50%);\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n  .searchbox-container .form-control {\n    color: currentColor; }\n\n.searchbox-content {\n  position: absolute;\n  bottom: 0;\n  left: 52.5%;\n  transform: translateX(-50%);\n  width: 50%; }\n\n.searchbox-input {\n  width: 75%;\n  float: left;\n  color: inherit; }\n\n.search-btn-container {\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  left: 35px;\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n  .searchbox-container .form-control {\n    color: currentColor; }\n\n.searchbox-content {\n  width: 640px;\n  margin: 0 auto; }\n\n.searchbox-input {\n  display: inline-block;\n  width: 69%;\n  color: inherit; }\n\n.search-btn-container {\n  width: 30%;\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
 
 	// exports
 
@@ -20834,7 +20834,7 @@
 
 
 	// module
-	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  left: 1%;\n  width: 95%;\n  height: 230px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em;\n    height: 25px; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
+	exports.push([module.id, ".bookmark-container {\n  position: relative;\n  left: 1%;\n  width: 95%;\n  height: 230px;\n  padding-right: 3%;\n  border-right: 1px dashed #FFFFFF; }\n\n@media (max-width: 1120px) {\n  .bookmark-container {\n    width: 98%;\n    border: none; } }\n\n@media (max-width: 960px) {\n  .bookmark-container {\n    position: relative;\n    left: 1%;\n    width: 100%;\n    height: 230px;\n    border: none; } }\n\n.book-body {\n  height: 120px;\n  margin: 0 auto 30px;\n  overflow: scroll;\n  text-align: center; }\n  .book-body .col-md-2 {\n    margin: 3px 0;\n    border-radius: 3px;\n    transition: all 150ms linear; }\n    .book-body .col-md-2:hover, .book-body .col-md-2:active {\n      background-color: rgba(255, 255, 255, 0.7); }\n      .book-body .col-md-2:hover > .fa, .book-body .col-md-2:active > .fa {\n        opacity: 1; }\n      .book-body .col-md-2:hover > .book-link, .book-body .col-md-2:active > .book-link {\n        color: #00796B; }\n  .book-body .book-link {\n    display: inline-block;\n    padding: 5px 2em;\n    color: #FFFFFF;\n    height: 2em;\n    overflow: hidden; }\n    .book-body .book-link:hover, .book-body .book-link:active {\n      color: #00796B;\n      text-decoration: none; }\n  .book-body .link-setting {\n    position: absolute;\n    top: 0;\n    line-height: 33px;\n    opacity: 0;\n    cursor: pointer; }\n    .book-body .link-setting.del {\n      left: .5em; }\n      .book-body .link-setting.del:hover {\n        color: #F44336; }\n    .book-body .link-setting.edit {\n      right: .5em; }\n      .book-body .link-setting.edit:hover {\n        color: #009688; }\n\n.bookmark-head {\n  margin-bottom: 10px; }\n  .bookmark-head h3 {\n    display: inline-block; }\n  .bookmark-head .book-input {\n    display: inline;\n    margin-left: 1em;\n    width: 15em;\n    height: 25px; }\n\n.book-edit {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n  .book-edit .well {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 85%;\n    transform: translate(-50%, -50%);\n    z-index: 99; }\n  .book-edit .form-group {\n    display: inline; }\n    .book-edit .form-group .btn {\n      margin-left: 22px; }\n  .book-edit .book-label {\n    display: inline-block;\n    width: 50px;\n    text-align: center; }\n  .book-edit .book-link-input {\n    display: inline-block; }\n    .book-edit .book-link-input.name {\n      width: 12.5%; }\n    .book-edit .book-link-input.link {\n      width: 55%; }\n  .book-edit .well-close {\n    position: absolute;\n    top: 3px;\n    right: 10px;\n    color: #CDDC39;\n    cursor: pointer; }\n    .book-edit .well-close:hover {\n      color: #727272; }\n", ""]);
 
 	// exports
 
@@ -21233,28 +21233,34 @@
 	    _createClass(Weather, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            var _this2 = this;
+
 	            this.renderWeather(this.state.city);
+
+	            setInterval(function () {
+	                _this2.renderWeather(_this2.state.city);
+	            }, 1000 * 60 / 60);
 	        }
 	    }, {
 	        key: 'renderWeather',
 	        value: function renderWeather(city) {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            this._getCityWeather(city, function (data) {
 
 	                if (!data) {
-	                    _this2.setState({
+	                    _this3.setState({
 	                        hasCity: false
 	                    });
 	                    return;
 	                }
 
-	                _this2.setState({
+	                _this3.setState({
 	                    hasCity: true,
 	                    curTmp: data.curW.tmp,
 	                    curCondTxt: data.curW.cond.txt,
 	                    foreWs: data.foreWs,
-	                    curPickWeather: data.foreWs[_this2.props.pickIndex]
+	                    curPickWeather: data.foreWs[_this3.props.pickIndex]
 	                });
 	            });
 	        }
@@ -21314,6 +21320,8 @@
 	        key: '_getCityWeather',
 	        value: function _getCityWeather(cityVal, callback) {
 
+	            var self = this;
+
 	            $.ajax({
 	                url: WEATHER_API,
 	                data: {
@@ -21324,6 +21332,11 @@
 	                    return data;
 	                },
 	                error: function error(err) {
+
+	                    setInterval(function () {
+	                        return self.renderWeather(self.state.city);
+	                    }, 1000 * 5 / 60);
+
 	                    throw err;
 	                }
 
@@ -21570,7 +21583,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  height: 230px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: -1px 2px 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -230px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 94%;\n  height: 100%;\n  margin: 0 auto;\n  overflow: scroll; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  min-width: 800px;\n  height: 230px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: -1px 2px 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -230px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 94%;\n  height: 100%;\n  margin: 0 auto;\n  overflow: scroll; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 
@@ -21695,7 +21708,7 @@
 
 
 	// module
-	exports.push([module.id, ".clock-container {\n  position: absolute;\n  top: 48%;\n  transform: translateY(-50%);\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  font-size: 7.7em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
+	exports.push([module.id, ".clock-container {\n  position: relative;\n  margin-bottom: 20px;\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  font-size: 7.7em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
 
 	// exports
 
@@ -21836,7 +21849,7 @@
 
 
 	// module
-	exports.push([module.id, ".theme-container {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 1; }\n\n.theme-icon {\n  position: absolute;\n  bottom: 20px;\n  left: 20px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  border-radius: 5px;\n  opacity: .6;\n  transition: all 180ms linear;\n  z-index: 99; }\n  .theme-icon:hover {\n    opacity: 1;\n    cursor: pointer; }\n\n.theme-light {\n  color: #009688;\n  background: #FFFFFF; }\n\n.theme-dark {\n  color: #FFFFFF;\n  background: #009688; }\n", ""]);
+	exports.push([module.id, ".theme-container {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  min-width: 800px;\n  min-height: 480px;\n  z-index: 1; }\n\n.theme-icon {\n  position: absolute;\n  bottom: 20px;\n  left: 20px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  border-radius: 5px;\n  opacity: .6;\n  transition: all 180ms linear;\n  z-index: 99; }\n  .theme-icon:hover {\n    opacity: 1;\n    cursor: pointer; }\n\n.theme-light {\n  color: #009688;\n  background: #FFFFFF; }\n\n.theme-dark {\n  color: #FFFFFF;\n  background: #009688; }\n", ""]);
 
 	// exports
 
@@ -21876,7 +21889,7 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  padding-top: 20%;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  z-index: 0; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  min-width: 800px;\n  min-height: 480px;\n  padding-top: 245px;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  overflow: hidden;\n  z-index: 0; }\n", ""]);
 
 	// exports
 
@@ -21916,7 +21929,7 @@
 
 
 	// module
-	exports.push([module.id, "#donutTab {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0; }\n", ""]);
+	exports.push([module.id, "#donutTab {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  width: 100%;\n  height: 100%; }\n", ""]);
 
 	// exports
 

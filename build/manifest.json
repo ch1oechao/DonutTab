@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "DonutTab",
-    "version": "1.0",
+    "version": "1.1.1",
     "author": "zchen9",
     "description": "DonutTab Chrome扩展",
     "icons": {
@@ -9,6 +9,7 @@
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
     },
+    "content_security_policy": "script-src 'self'; object-src 'self'",
     "chrome_url_overrides": {
         "newtab": "index.html"
     }

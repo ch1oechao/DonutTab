@@ -4,6 +4,7 @@
     position: absolute;
     left: 0;
     width: 100%;
+    min-width: 800px;
     height: 230px;
     color: $primary-color-text;
     background-color: $primary-color;
@@ -65,4 +66,3 @@
     }
 
 }
-

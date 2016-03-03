@@ -1,19 +1,18 @@
 .clock-container {
-	position: absolute;
-	top: 48%;
-	transform: translateY(-50%);
+	position: relative;
+    margin-bottom: 20px;
     width: 100%;
     text-align: center;
     text-indent: -2.2em;
 }
 
 .clock-time {
-	display: inline;
-	font-size: 7.7em;
+    display: inline;
+    font-size: 7.7em;
 }
 
 .clock-text {
-	font-size: 1.1em;
-	word-spacing: .2em;
+    font-size: 1.1em;
+    word-spacing: .2em;
 }
  
