@@ -21332,14 +21332,6 @@
 
 	            var self = this;
 
-	            this.setState({
-	                hasCity: true,
-	                curTmp: '',
-	                curCondTxt: 'Loading...',
-	                foreWs: [],
-	                curPickWeather: {}
-	            });
-
 	            $.ajax({
 	                url: WEATHER_API,
 	                data: {
