@@ -13,7 +13,7 @@ export default class Calendar extends React.Component {
         this.state = {
             curDateVal: this._getDateVal(),
             curWeeks: [],
-            pickWeek: ''
+            pickWeek: this._getDateVal().week
         };
     }
 

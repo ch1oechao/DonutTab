@@ -22,12 +22,18 @@ export default class Tab extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({
+            tabClass: localStorage.getItem('curIsDark') === true ? 'donut-tab-container dark' : 'donut-tab-container light'
+        });
+    }
+
     _genRandomNum() {
         var randomNum = Math.floor(Math.random() * 100) + 1;
 
         this.setState({
             randomNum: randomNum
-        })
+        });
 
         return randomNum < 10 ? ('0' + randomNum) : randomNum;
     }
@@ -35,7 +41,7 @@ export default class Tab extends React.Component {
     handleCallback(res) {
         this.setState({
             tabClass: res ? 'donut-tab-container dark' : 'donut-tab-container light'
-        })
+        });
     }
 
     render() {

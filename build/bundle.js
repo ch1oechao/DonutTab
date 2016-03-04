@@ -19788,6 +19788,13 @@
 	    }
 
 	    _createClass(Tab, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.setState({
+	                tabClass: localStorage.getItem('curIsDark') === true ? 'donut-tab-container dark' : 'donut-tab-container light'
+	            });
+	        }
+	    }, {
 	        key: '_genRandomNum',
 	        value: function _genRandomNum() {
 	            var randomNum = Math.floor(Math.random() * 100) + 1;
@@ -20990,7 +20997,7 @@
 	        _this.state = {
 	            curDateVal: _this._getDateVal(),
 	            curWeeks: [],
-	            pickWeek: ''
+	            pickWeek: _this._getDateVal().week
 	        };
 	        return _this;
 	    }
@@ -21250,29 +21257,50 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.renderWeather(this.state.city);
+	            this.setState({
+	                timestamp: +new Date()
+	            });
 	        }
 	    }, {
 	        key: 'renderWeather',
 	        value: function renderWeather(city) {
 	            var _this2 = this;
 
-	            this._getCityWeather(city, function (data) {
+	            var isTimeOut = +new Date() - this.state.timestamp > 1000 * 60 * 60 * 6 ? true : false,
+	                curWeatherCity = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).curCity : '';
 
-	                if (!data) {
+	            if (curWeatherCity === city && !isTimeOut) {
+
+	                this.setState(JSON.parse(localStorage.getItem('curWeather')));
+	            } else {
+
+	                this._getCityWeather(city, function (data) {
+
+	                    if (!data) {
+	                        _this2.setState({
+	                            hasCity: false
+	                        });
+	                        return;
+	                    }
+
+	                    var weatherInfo = {
+	                        hasCity: true,
+	                        curCity: city,
+	                        curTmp: data.curW.tmp,
+	                        curCondTxt: data.curW.cond.txt,
+	                        foreWs: data.foreWs,
+	                        curPickWeather: data.foreWs[_this2.props.pickIndex]
+	                    };
+
+	                    _this2.setState(weatherInfo);
+
 	                    _this2.setState({
-	                        hasCity: false
+	                        timestamp: +new Date()
 	                    });
-	                    return;
-	                }
 
-	                _this2.setState({
-	                    hasCity: true,
-	                    curTmp: data.curW.tmp,
-	                    curCondTxt: data.curW.cond.txt,
-	                    foreWs: data.foreWs,
-	                    curPickWeather: data.foreWs[_this2.props.pickIndex]
+	                    localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
 	                });
-	            });
+	            }
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
