@@ -29,18 +29,21 @@ export default class Weather extends React.Component {
 
     componentDidMount() {
         this.renderWeather(this.state.city);
-        this.setState({
-            timestamp: +(new Date())
-        });
+    }
+
+    _convertTime(time) {
+        return time >= 10 ? time : '0' + time;;
     }
 
     renderWeather(city) {
 
-        var isTimeOut = +(new Date()) - this.state.timestamp > 1000 * 60 * 60 * 6 ? true : false,
-            curWeatherCity = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).curCity : '';
+        var curWeatherCity = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).curCity : '',
+            curDay = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).foreWs[0].date.substr(-2) : '0',
+            isCurCity = curWeatherCity === city,
+            isDayOut = curDay !== this._convertTime((new Date()).getDate());
 
-        if (curWeatherCity === city  && !isTimeOut) {
-
+        if (isCurCity && !isDayOut) {
+            
             this.setState(JSON.parse(localStorage.getItem('curWeather')));
 
         } else {
@@ -64,10 +67,6 @@ export default class Weather extends React.Component {
                 };
 
                 this.setState(weatherInfo);
-
-                this.setState({
-                    timestamp: +(new Date())
-                });
 
                 localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
 
