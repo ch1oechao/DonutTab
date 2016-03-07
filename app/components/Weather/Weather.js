@@ -37,43 +37,64 @@ export default class Weather extends React.Component {
 
     renderWeather(city) {
 
-        var curWeatherCity = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).curCity : '',
-            curDay = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).foreWs[0].date.substr(-2) : '0',
-            isCurCity = curWeatherCity === city,
-            isDayOut = curDay !== this._convertTime((new Date()).getDate());
+        if (localStorage.getItem('curWeather')) {
+            var curWeather = JSON.parse(localStorage.getItem('curWeather')),
+                curWeatherCity = curWeather.curCity,
+                curDay = curWeather.foreWs[0].date.substr(-2),
+                isCurCity = curWeatherCity === city,
+                isDayOut = curDay !== this._convertTime((new Date()).getDate());
 
-        if (isCurCity && !isDayOut) {
+            if (isCurCity && !isDayOut) {  
+
+                this.setState(JSON.parse(localStorage.getItem('curWeather')));
+
+            } else {
+
+                this.getWeatherData(city);   
             
-            this.setState(JSON.parse(localStorage.getItem('curWeather')));
+            }
+
 
         } else {
-            
-            this._getCityWeather(city, (data) => {
 
-                if (!data) {
-                    this.setState({
-                        hasCity: false
-                    });
-                    return;
-                }
-
-                var weatherInfo = {
-                    hasCity: true,
-                    curCity: city,
-                    curTmp: data.curW.tmp,
-                    curCondTxt: data.curW.cond.txt,
-                    foreWs: data.foreWs,
-                    curPickWeather: data.foreWs[this.props.pickIndex]
-                };
-
-                this.setState(weatherInfo);
-
-                localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
-
-            });
+            this.getWeatherData(city);
 
         }
 
+    }
+
+    getWeatherData(city) {
+        this._getCityWeather(city, (data) => {
+
+            if (!data) {
+                this.setState({
+                    hasCity: false
+                });
+                return;
+            }
+
+            var pickIndex = this.props.pickIndex;
+
+            data.foreWs.forEach((item, idx) => {
+                if (item.date.substr(-2) === this._convertTime((new Date()).getDate())) {
+                    pickIndex += idx;
+                }
+            });
+
+            var weatherInfo = {
+                hasCity: true,
+                curCity: city,
+                curTmp: data.curW.tmp,
+                curCondTxt: data.curW.cond.txt,
+                foreWs: data.foreWs,
+                curPickWeather: data.foreWs[pickIndex]
+            };
+
+            this.setState(weatherInfo);
+
+            localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
+
+        });
     }
 
     componentWillReceiveProps(nextProps) {

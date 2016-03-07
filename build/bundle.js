@@ -21255,41 +21255,61 @@
 	    }, {
 	        key: 'renderWeather',
 	        value: function renderWeather(city) {
-	            var _this2 = this;
 
-	            var curWeatherCity = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).curCity : '',
-	                curDay = localStorage.getItem('curWeather') ? JSON.parse(localStorage.getItem('curWeather')).foreWs[0].date.substr(-2) : '0',
-	                isCurCity = curWeatherCity === city,
-	                isDayOut = curDay !== this._convertTime(new Date().getDate());
+	            if (localStorage.getItem('curWeather')) {
+	                var curWeather = JSON.parse(localStorage.getItem('curWeather')),
+	                    curWeatherCity = curWeather.curCity,
+	                    curDay = curWeather.foreWs[0].date.substr(-2),
+	                    isCurCity = curWeatherCity === city,
+	                    isDayOut = curDay !== this._convertTime(new Date().getDate());
 
-	            if (isCurCity && !isDayOut) {
+	                if (isCurCity && !isDayOut) {
 
-	                this.setState(JSON.parse(localStorage.getItem('curWeather')));
+	                    this.setState(JSON.parse(localStorage.getItem('curWeather')));
+	                } else {
+
+	                    this.getWeatherData(city);
+	                }
 	            } else {
 
-	                this._getCityWeather(city, function (data) {
-
-	                    if (!data) {
-	                        _this2.setState({
-	                            hasCity: false
-	                        });
-	                        return;
-	                    }
-
-	                    var weatherInfo = {
-	                        hasCity: true,
-	                        curCity: city,
-	                        curTmp: data.curW.tmp,
-	                        curCondTxt: data.curW.cond.txt,
-	                        foreWs: data.foreWs,
-	                        curPickWeather: data.foreWs[_this2.props.pickIndex]
-	                    };
-
-	                    _this2.setState(weatherInfo);
-
-	                    localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
-	                });
+	                this.getWeatherData(city);
 	            }
+	        }
+	    }, {
+	        key: 'getWeatherData',
+	        value: function getWeatherData(city) {
+	            var _this2 = this;
+
+	            this._getCityWeather(city, function (data) {
+
+	                if (!data) {
+	                    _this2.setState({
+	                        hasCity: false
+	                    });
+	                    return;
+	                }
+
+	                var pickIndex = _this2.props.pickIndex;
+
+	                data.foreWs.forEach(function (item, idx) {
+	                    if (item.date.substr(-2) === _this2._convertTime(new Date().getDate())) {
+	                        pickIndex += idx;
+	                    }
+	                });
+
+	                var weatherInfo = {
+	                    hasCity: true,
+	                    curCity: city,
+	                    curTmp: data.curW.tmp,
+	                    curCondTxt: data.curW.cond.txt,
+	                    foreWs: data.foreWs,
+	                    curPickWeather: data.foreWs[pickIndex]
+	                };
+
+	                _this2.setState(weatherInfo);
+
+	                localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
+	            });
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
@@ -21525,7 +21545,7 @@
 
 
 	// module
-	exports.push([module.id, ".weather-container {\n  position: relative;\n  margin: 0 auto;\n  width: 280px; }\n\n.weather-location {\n  position: absolute;\n  top: -95px;\n  right: 3px;\n  padding: 0;\n  margin: 0; }\n  .weather-location .form-control {\n    color: #FFF; }\n  .weather-location:hover::after {\n    display: inline-block; }\n  .weather-location::after {\n    content: 'Click to edit it. & Press ENTER to save it.';\n    display: none;\n    position: absolute;\n    top: -2.35em;\n    right: 0;\n    width: 250px;\n    height: 1.85em;\n    line-height: 1.85em;\n    text-align: center;\n    font-size: .45em;\n    color: #FFF;\n    background: rgba(0, 0, 0, 0.3);\n    border-radius: 2px; }\n\n.weather-city {\n  margin: 0 .5em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 22px;\n  left: -1px;\n  width: 100%; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: 5px;\n  top: 35px; }\n", ""]);
+	exports.push([module.id, ".weather-container {\n  position: relative;\n  margin: 0 auto;\n  width: 280px; }\n\n.weather-location {\n  position: absolute;\n  top: -89px;\n  right: 3px;\n  padding: 0;\n  margin: 0; }\n  .weather-location .form-control {\n    color: #FFF; }\n  .weather-location:hover::after {\n    display: inline-block; }\n  .weather-location::after {\n    content: 'Click to edit it. & Press ENTER to save it.';\n    display: none;\n    position: absolute;\n    top: -2.35em;\n    right: 0;\n    width: 250px;\n    height: 1.85em;\n    line-height: 1.85em;\n    text-align: center;\n    font-size: .45em;\n    color: #FFF;\n    background: rgba(0, 0, 0, 0.3);\n    border-radius: 2px; }\n\n.weather-city {\n  margin: 0 .5em;\n  font-size: 1.15em; }\n\n.weather-city-input {\n  display: inline-block;\n  width: 80px;\n  height: 25px;\n  padding: 0;\n  margin: 0 .5em; }\n\n.weather-info {\n  position: relative;\n  top: 22px;\n  left: -1px;\n  width: 100%; }\n  .weather-info p {\n    margin-bottom: 15px; }\n  .weather-info .label {\n    padding: .3em .5em;\n    margin-right: 1em;\n    line-height: 1em; }\n\n.weather-noinfo {\n  position: relative;\n  left: 5px;\n  top: 35px; }\n", ""]);
 
 	// exports
 
@@ -21565,7 +21585,7 @@
 
 
 	// module
-	exports.push([module.id, ".calendar-container {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.calendar-head {\n  position: relative;\n  top: 3px;\n  left: -29px;\n  margin-bottom: 18px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n  .calendar-title small {\n    color: inherit; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 40px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      transition: all 200ms ease-out;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
+	exports.push([module.id, ".calendar-container {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%); }\n\n.calendar-head {\n  position: relative;\n  top: 3px;\n  left: -29px;\n  margin-bottom: 18px; }\n  .calendar-head .fa {\n    font-size: .8em; }\n\n.calendar-title {\n  position: relative;\n  top: 2px;\n  display: inline-block;\n  margin-bottom: 10px;\n  text-indent: .4em; }\n  .calendar-title small {\n    color: inherit; }\n\n.calendar-week {\n  margin: 0;\n  padding: 0;\n  list-style: none; }\n  .calendar-week li {\n    display: inline-block;\n    width: 40px;\n    height: 22px;\n    line-height: 22px;\n    text-align: center; }\n    .calendar-week li span {\n      display: inline-block;\n      height: 22px;\n      width: 22px;\n      border-radius: 50%;\n      text-indent: -0.08em;\n      transition: all 200ms ease-out;\n      cursor: pointer; }\n      .calendar-week li span.active {\n        color: #009688;\n        background-color: #FFFFFF; }\n", ""]);
 
 	// exports
 
