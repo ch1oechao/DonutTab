@@ -18,29 +18,19 @@ export default class Tab extends React.Component {
             tabStyle: {
                 backgroundImage: 'url(' + BG_LINK + this._genRandomNum() + '.jpg)'
             },
-            tabClass: 'donut-tab-container light'
+            tabClass: JSON.parse(localStorage.getItem('curIsDark')) ? 'donut-tab-container light-font' : 'donut-tab-container dark-font'
         }
-    }
-
-    componentDidMount() {
-        this.setState({
-            tabClass: localStorage.getItem('curIsDark') === true ? 'donut-tab-container dark' : 'donut-tab-container light'
-        });
     }
 
     _genRandomNum() {
         var randomNum = Math.floor(Math.random() * 100) + 1;
-
-        this.setState({
-            randomNum: randomNum
-        });
 
         return randomNum < 10 ? ('0' + randomNum) : randomNum;
     }
 
     handleCallback(res) {
         this.setState({
-            tabClass: res ? 'donut-tab-container dark' : 'donut-tab-container light'
+            tabClass: res ? 'donut-tab-container light-font' : 'donut-tab-container dark-font'
         });
     }
 

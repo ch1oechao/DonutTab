@@ -19782,26 +19782,15 @@
 	            tabStyle: {
 	                backgroundImage: 'url(' + BG_LINK + _this._genRandomNum() + '.jpg)'
 	            },
-	            tabClass: 'donut-tab-container light'
+	            tabClass: JSON.parse(localStorage.getItem('curIsDark')) ? 'donut-tab-container light-font' : 'donut-tab-container dark-font'
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Tab, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.setState({
-	                tabClass: localStorage.getItem('curIsDark') === true ? 'donut-tab-container dark' : 'donut-tab-container light'
-	            });
-	        }
-	    }, {
 	        key: '_genRandomNum',
 	        value: function _genRandomNum() {
 	            var randomNum = Math.floor(Math.random() * 100) + 1;
-
-	            this.setState({
-	                randomNum: randomNum
-	            });
 
 	            return randomNum < 10 ? '0' + randomNum : randomNum;
 	        }
@@ -19809,7 +19798,7 @@
 	        key: 'handleCallback',
 	        value: function handleCallback(res) {
 	            this.setState({
-	                tabClass: res ? 'donut-tab-container dark' : 'donut-tab-container light'
+	                tabClass: res ? 'donut-tab-container light-font' : 'donut-tab-container dark-font'
 	            });
 	        }
 	    }, {
@@ -21783,10 +21772,10 @@
 	    _react2.default.createElement('i', { className: 'fa fa-moon-o' })
 	);
 	var LIGHT_STYLE = {
-	    background: 'linear-gradient(to bottom, rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .3), rgba(255, 255, 255, .1) 100%)'
+	    background: 'linear-gradient(to bottom, rgba(255, 255, 255, .15) 0, rgba(255, 255, 255, .3), rgba(255, 255, 255, .15) 100%)'
 	};
 	var DARK_STYLE = {
-	    background: 'linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, .3) 100%)'
+	    background: 'linear-gradient(to bottom, rgba(0, 0, 0, .35) 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, .35) 100%)'
 	};
 
 	var Theme = function (_React$Component) {
@@ -21804,11 +21793,6 @@
 	    }
 
 	    _createClass(Theme, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.props.onChangeTheme(!this.state.isDark);
-	        }
-	    }, {
 	        key: 'handleClick',
 	        value: function handleClick(ev) {
 
@@ -21822,13 +21806,14 @@
 	            // set local
 	            localStorage.setItem('curIsDark', !isDark);
 
-	            this.props.onChangeTheme(isDark);
+	            this.props.onChangeTheme(!isDark);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var isDark = this.state.isDark,
-	                themeStyle = isDark ? DARK_STYLE : LIGHT_STYLE;
+	                themeStyle = isDark ? DARK_STYLE : LIGHT_STYLE,
+	                themeIcon = isDark ? DARK_ICON : LIGHT_ICON;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -21836,7 +21821,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { onClick: this.handleClick.bind(this) },
-	                    isDark ? DARK_ICON : LIGHT_ICON
+	                    themeIcon
 	                )
 	            );
 	        }
@@ -21922,7 +21907,7 @@
 
 
 	// module
-	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  min-width: 800px;\n  min-height: 480px;\n  padding-top: 245px;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  overflow: hidden;\n  z-index: 0; }\n  .donut-tab-container.dark {\n    color: #212121; }\n  .donut-tab-container.light {\n    color: #FFF; }\n", ""]);
+	exports.push([module.id, ".donut-tab-container {\n  width: 100%;\n  height: 100%;\n  min-width: 800px;\n  min-height: 480px;\n  padding-top: 245px;\n  background: linear-gradient(to bottom, #EB6BD4, #94ABE2);\n  background-image: url(//7xr6bj.com1.z0.glb.clouddn.com/%20dfvsdfvdsfvdfv.jpg);\n  background-repeat: none;\n  background-position: center center;\n  background-attachment: scroll;\n  background-size: cover;\n  overflow: hidden;\n  z-index: 0; }\n  .donut-tab-container.dark-font {\n    color: #212121; }\n  .donut-tab-container.light-font {\n    color: #FFF; }\n", ""]);
 
 	// exports
 

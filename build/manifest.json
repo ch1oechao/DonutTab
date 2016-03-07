@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "DonutTab",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "author": "zchen9",
     "description": "DonutTab Chrome扩展",
     "icons": {

@@ -13,10 +13,10 @@ const DARK_ICON = (
         </span>
     );
 const LIGHT_STYLE = {
-    background: 'linear-gradient(to bottom, rgba(255, 255, 255, .1) 0, rgba(255, 255, 255, .3), rgba(255, 255, 255, .1) 100%)'
+    background: 'linear-gradient(to bottom, rgba(255, 255, 255, .15) 0, rgba(255, 255, 255, .3), rgba(255, 255, 255, .15) 100%)'
 }
 const DARK_STYLE = {
-    background: 'linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, .3) 100%)'
+    background: 'linear-gradient(to bottom, rgba(0, 0, 0, .35) 0, rgba(0, 0, 0, .1), rgba(0, 0, 0, .35) 100%)'
 }
 
 export default class Theme extends React.Component {
@@ -26,10 +26,6 @@ export default class Theme extends React.Component {
         this.state = {
             isDark: JSON.parse(localStorage.getItem('curIsDark')) ? true : false
         }
-    }
-
-    componentDidMount() {
-        this.props.onChangeTheme(!this.state.isDark);
     }
 
     handleClick(ev) {
@@ -44,19 +40,18 @@ export default class Theme extends React.Component {
         // set local
         localStorage.setItem('curIsDark', !isDark);
 
-        this.props.onChangeTheme(isDark);
+        this.props.onChangeTheme(!isDark);
     }
 
 
     render() {
         var isDark = this.state.isDark,
-            themeStyle = isDark ? DARK_STYLE : LIGHT_STYLE;
+            themeStyle = isDark ? DARK_STYLE : LIGHT_STYLE,
+            themeIcon = isDark ? DARK_ICON : LIGHT_ICON;
 
         return (
             <div className="theme-container" style={themeStyle}>
-                <div onClick={this.handleClick.bind(this)}>
-                    {isDark ? DARK_ICON : LIGHT_ICON}
-                </div>
+                <div onClick={this.handleClick.bind(this)}>{themeIcon}</div>
             </div>
         );
     }
