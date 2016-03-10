@@ -21261,7 +21261,7 @@
 	                    curWeatherCity = curWeather.curCity,
 	                    curDay = curWeather.foreWs[0].date.substr(-2),
 	                    isCurCity = curWeatherCity === city,
-	                    isDayOut = curDay !== this._convertTime(new Date().getDate());
+	                    isDayOut = curDay === this._convertTime(new Date().getDate());
 
 	                if (isCurCity && !isDayOut) {
 
@@ -21289,11 +21289,9 @@
 	                    return;
 	                }
 
-	                var pickIndex = _this2.props.pickIndex;
-
 	                data.foreWs.forEach(function (item, idx) {
-	                    if (item.date.substr(-2) === _this2._convertTime(new Date().getDate())) {
-	                        pickIndex += idx;
+	                    if (+item.date.substr(-2) < _this2._convertTime(new Date().getDate())) {
+	                        data.foreWs.splice(idx, 1);
 	                    }
 	                });
 
@@ -21303,7 +21301,7 @@
 	                    curTmp: data.curW.tmp,
 	                    curCondTxt: data.curW.cond.txt,
 	                    foreWs: data.foreWs,
-	                    curPickWeather: data.foreWs[pickIndex]
+	                    curPickWeather: data.foreWs[_this2.props.pickIndex]
 	                };
 
 	                _this2.setState(weatherInfo);

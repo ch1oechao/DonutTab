@@ -42,10 +42,10 @@ export default class Weather extends React.Component {
                 curWeatherCity = curWeather.curCity,
                 curDay = curWeather.foreWs[0].date.substr(-2),
                 isCurCity = curWeatherCity === city,
-                isDayOut = curDay !== this._convertTime((new Date()).getDate());
+                isDayOut = curDay === this._convertTime((new Date()).getDate());
 
-            if (isCurCity && !isDayOut) {  
-
+            if (isCurCity && !isDayOut) {
+                
                 this.setState(JSON.parse(localStorage.getItem('curWeather')));
 
             } else {
@@ -73,11 +73,9 @@ export default class Weather extends React.Component {
                 return;
             }
 
-            var pickIndex = this.props.pickIndex;
-
             data.foreWs.forEach((item, idx) => {
-                if (item.date.substr(-2) === this._convertTime((new Date()).getDate())) {
-                    pickIndex += idx;
+                if (+item.date.substr(-2) < this._convertTime((new Date()).getDate())) {
+                    data.foreWs.splice(idx, 1)
                 }
             });
 
@@ -87,7 +85,7 @@ export default class Weather extends React.Component {
                 curTmp: data.curW.tmp,
                 curCondTxt: data.curW.cond.txt,
                 foreWs: data.foreWs,
-                curPickWeather: data.foreWs[pickIndex]
+                curPickWeather: data.foreWs[this.props.pickIndex]
             };
 
             this.setState(weatherInfo);
