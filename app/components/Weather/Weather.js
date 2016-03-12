@@ -63,6 +63,16 @@ export default class Weather extends React.Component {
 
     }
 
+    _getRightDate(foreWs) {
+        foreWs.forEach((item, idx) => {
+            if (+item.date.substr(-2) < this._convertTime((new Date()).getDate())) {
+                foreWs.splice(idx, 1)
+            }
+        });
+
+        return foreWs;
+    }
+
     getWeatherData(city) {
         this._getCityWeather(city, (data) => {
 
@@ -73,19 +83,13 @@ export default class Weather extends React.Component {
                 return;
             }
 
-            data.foreWs.forEach((item, idx) => {
-                if (+item.date.substr(-2) < this._convertTime((new Date()).getDate())) {
-                    data.foreWs.splice(idx, 1)
-                }
-            });
-
             var weatherInfo = {
                 hasCity: true,
                 curCity: city,
                 curTmp: data.curW.tmp,
                 curCondTxt: data.curW.cond.txt,
-                foreWs: data.foreWs,
-                curPickWeather: data.foreWs[this.props.pickIndex]
+                foreWs: this._getRightDate(data.foreWs),
+                curPickWeather: this._getRightDate(data.foreWs)[this.props.pickIndex]
             };
 
             this.setState(weatherInfo);

@@ -19893,7 +19893,7 @@
 
 	        _this.state = {
 	            value: undefined,
-	            label: "😎 Let's make something beautiful",
+	            label: '',
 	            engines: searchEngines,
 	            curEngine: _this._getCurEngine(),
 	            enginesDict: _this._getEnginesDict(searchEngines)
@@ -20131,7 +20131,7 @@
 
 
 	// module
-	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  left: 35px;\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n  .searchbox-container .form-control {\n    color: currentColor; }\n\n.searchbox-content {\n  width: 640px;\n  margin: 0 auto; }\n\n.searchbox-input {\n  display: inline-block;\n  width: 69%;\n  color: inherit; }\n\n.search-btn-container {\n  width: 30%;\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
+	exports.push([module.id, ".searchbox-container {\n  position: relative;\n  left: 40px;\n  width: 100%;\n  height: 22%;\n  z-index: 9; }\n  .searchbox-container .form-control {\n    color: currentColor; }\n\n.searchbox-content {\n  width: 640px;\n  margin: 0 auto; }\n\n.searchbox-input {\n  display: inline-block;\n  width: 69%;\n  color: inherit; }\n\n.search-btn-container {\n  width: 30%;\n  margin-left: 5px; }\n  .search-btn-container .search-btn {\n    letter-spacing: .1em; }\n  .search-btn-container .dropdown-menu li {\n    text-indent: .75em;\n    letter-spacing: .1em; }\n", ""]);
 
 	// exports
 
@@ -21276,35 +21276,42 @@
 	            }
 	        }
 	    }, {
+	        key: '_getRightDate',
+	        value: function _getRightDate(foreWs) {
+	            var _this2 = this;
+
+	            foreWs.forEach(function (item, idx) {
+	                if (+item.date.substr(-2) < _this2._convertTime(new Date().getDate())) {
+	                    foreWs.splice(idx, 1);
+	                }
+	            });
+
+	            return foreWs;
+	        }
+	    }, {
 	        key: 'getWeatherData',
 	        value: function getWeatherData(city) {
-	            var _this2 = this;
+	            var _this3 = this;
 
 	            this._getCityWeather(city, function (data) {
 
 	                if (!data) {
-	                    _this2.setState({
+	                    _this3.setState({
 	                        hasCity: false
 	                    });
 	                    return;
 	                }
-
-	                data.foreWs.forEach(function (item, idx) {
-	                    if (+item.date.substr(-2) < _this2._convertTime(new Date().getDate())) {
-	                        data.foreWs.splice(idx, 1);
-	                    }
-	                });
 
 	                var weatherInfo = {
 	                    hasCity: true,
 	                    curCity: city,
 	                    curTmp: data.curW.tmp,
 	                    curCondTxt: data.curW.cond.txt,
-	                    foreWs: data.foreWs,
-	                    curPickWeather: data.foreWs[_this2.props.pickIndex]
+	                    foreWs: _this3._getRightDate(data.foreWs),
+	                    curPickWeather: _this3._getRightDate(data.foreWs)[_this3.props.pickIndex]
 	                };
 
-	                _this2.setState(weatherInfo);
+	                _this3.setState(weatherInfo);
 
 	                localStorage.setItem('curWeather', JSON.stringify(weatherInfo));
 	            });
@@ -21623,7 +21630,7 @@
 
 
 	// module
-	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  min-width: 800px;\n  height: 230px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: -1px 2px 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -230px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 94%;\n  height: 100%;\n  margin: 0 auto;\n  overflow: scroll; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
+	exports.push([module.id, ".tools-container {\n  position: absolute;\n  left: 0;\n  width: 100%;\n  min-width: 800px;\n  height: 230px;\n  color: #FFFFFF;\n  background-color: #009688;\n  opacity: .9;\n  box-shadow: -1px 2px 15px #212121;\n  transition: top 300ms ease-out;\n  z-index: 9; }\n  .tools-container.fold {\n    top: -230px; }\n  .tools-container.unfold {\n    top: 0; }\n\n.tools-content {\n  width: 94%;\n  height: 100%;\n  margin: 0 auto;\n  overflow: scroll; }\n\n.tools-btn {\n  position: absolute;\n  bottom: -25px;\n  right: 20px;\n  width: 30px;\n  height: 30px;\n  text-align: center;\n  line-height: 45px;\n  background-color: #009688;\n  z-index: 11;\n  cursor: pointer; }\n  .tools-btn:before {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 14px;\n    left: -15px;\n    height: 0;\n    border: 15px dashed transparent;\n    border-bottom-color: #009688;\n    transform: rotate(-45deg); }\n  .tools-btn:after {\n    content: '';\n    display: block;\n    position: absolute;\n    top: 20px;\n    left: 0;\n    height: 0;\n    border: 15px dashed transparent;\n    border-top-color: #009688;\n    transform: rotate(90deg); }\n", ""]);
 
 	// exports
 
@@ -21632,7 +21639,7 @@
 /* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -21663,46 +21670,75 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Clock).call(this, props));
 
 	        _this.state = {
-	            curTime: _this._getCurTime()
+	            isTiming: false,
+	            timeState: ''
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Clock, [{
-	        key: "componentDidMount",
+	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var self = this;
 
 	            setInterval(function () {
-	                self.setState({ curTime: self._getCurTime() });
+	                self.setState({
+	                    curHour: self._getCurTime().hour,
+	                    curMins: self._getCurTime().mins
+	                });
 	            }, 1000 / 60);
 	        }
 	    }, {
-	        key: "_getCurTime",
+	        key: '_getCurTime',
 	        value: function _getCurTime() {
-	            var self = this,
-	                curTime = new Date(),
-	                hour = this._convertTime(curTime.getHours()),
+	            var curTime = new Date(),
+	                hour = this._convertTime(curTime.getHours(), 'hour'),
 	                mins = this._convertTime(curTime.getMinutes()),
 	                secs = this._convertTime(curTime.getSeconds());
 
-	            return [hour, mins].join(" : ");
+	            return {
+	                hour: hour,
+	                mins: mins
+	            };
 	        }
 	    }, {
-	        key: "_convertTime",
-	        value: function _convertTime(time) {
+	        key: '_convertTime',
+	        value: function _convertTime(time, type) {
+
+	            if (type === 'hour' && this.state.timing) {
+	                this.setState({
+	                    timeState: time > 12 ? 'PM' : 'AM'
+	                });
+
+	                time = time > 12 ? time - 12 : time;
+	            }
+
 	            return time >= 10 ? time : '0' + time;
 	        }
 	    }, {
-	        key: "render",
+	        key: 'changeTiming',
+	        value: function changeTiming() {
+	            this.setState({
+	                timing: !this.state.timing
+	            });
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "clock-container" },
+	                'div',
+	                { className: 'clock-container' },
 	                _react2.default.createElement(
-	                    "h2",
-	                    { className: "clock-time" },
-	                    this.state.curTime
+	                    'h2',
+	                    { className: 'clock-time', onClick: this.changeTiming.bind(this) },
+	                    this.state.curHour,
+	                    _react2.default.createElement(
+	                        'small',
+	                        null,
+	                        this.state.timing ? this.state.timeState : ''
+	                    ),
+	                    ' : ',
+	                    this.state.curMins
 	                )
 	            );
 	        }
@@ -21748,7 +21784,7 @@
 
 
 	// module
-	exports.push([module.id, ".clock-container {\n  position: relative;\n  margin-bottom: 20px;\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em; }\n\n.clock-time {\n  display: inline;\n  font-size: 7.7em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
+	exports.push([module.id, ".clock-container {\n  position: relative;\n  margin-bottom: 20px;\n  width: 100%;\n  text-align: center;\n  text-indent: -2.2em;\n  z-index: 10; }\n\n.clock-time {\n  position: relative;\n  display: inline;\n  font-size: 7.7em;\n  cursor: pointer; }\n  .clock-time small {\n    position: absolute;\n    top: 6.8em;\n    left: 13em;\n    color: inherit;\n    font-size: .12em; }\n\n.clock-text {\n  font-size: 1.1em;\n  word-spacing: .2em; }\n", ""]);
 
 	// exports
 

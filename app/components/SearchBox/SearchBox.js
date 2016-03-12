@@ -38,7 +38,7 @@ export default class SearchBox extends React.Component {
         super(props);
         this.state = { 
             value: undefined,
-            label: "😎 Let's make something beautiful",
+            label: '',
             engines: searchEngines,
             curEngine: this._getCurEngine(),
             enginesDict: this._getEnginesDict(searchEngines)

@@ -4,11 +4,22 @@
     width: 100%;
     text-align: center;
     text-indent: -2.2em;
+    z-index: 10;
 }
 
 .clock-time {
+	position: relative;
     display: inline;
     font-size: 7.7em;
+    cursor: pointer;
+
+    small {
+    	position: absolute;
+    	top: 6.8em;
+    	left: 13em;
+    	color: inherit;
+    	font-size: .12em;
+    }
 }
 
 .clock-text {

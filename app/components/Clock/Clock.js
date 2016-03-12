@@ -7,7 +7,8 @@ export default class Clock extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            curTime: this._getCurTime()
+            isTiming: false,
+            timeState: ''
         };
     }
 
@@ -15,29 +16,51 @@ export default class Clock extends React.Component {
         var self = this;
 
         setInterval(function(){
-            self.setState({curTime: self._getCurTime()})
+            self.setState({
+                curHour: self._getCurTime().hour,
+                curMins: self._getCurTime().mins
+            })
         }, 1000 / 60);
 
     }
 
     _getCurTime() {
-        var self = this,
-            curTime = new Date(),
-            hour = this._convertTime(curTime.getHours()),
+        var curTime = new Date(),
+            hour = this._convertTime(curTime.getHours(), 'hour'),
             mins = this._convertTime(curTime.getMinutes()),
             secs = this._convertTime(curTime.getSeconds());
 
-        return [hour, mins].join(" : ");
+        return { 
+            hour: hour,
+            mins: mins
+        };
     }
 
-    _convertTime(time) {
+    _convertTime(time, type) {
+
+        if (type === 'hour' && this.state.timing) {
+            this.setState({
+                timeState: time > 12 ? 'PM' : 'AM'
+            });
+
+            time = time > 12 ? time - 12 : time;
+        }
+
         return time >= 10 ? time : '0' + time;
+    }
+
+    changeTiming() {
+        this.setState({
+            timing: !this.state.timing
+        });
     }
 
     render() {
         return (
             <div className="clock-container">
-                <h2 className="clock-time">{this.state.curTime}</h2>
+                <h2 className="clock-time" onClick={this.changeTiming.bind(this)}>
+                    {this.state.curHour}<small>{this.state.timing ? this.state.timeState : ''}</small> : {this.state.curMins}
+                </h2>
             </div>
         );
     }
