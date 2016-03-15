@@ -21258,10 +21258,8 @@
 
 	            if (localStorage.getItem('curWeather')) {
 	                var curWeather = JSON.parse(localStorage.getItem('curWeather')),
-	                    curWeatherCity = curWeather.curCity,
-	                    curDay = curWeather.foreWs[0].date.substr(-2),
-	                    isCurCity = curWeatherCity === city,
-	                    isDayOut = curDay === this._convertTime(new Date().getDate());
+	                    isCurCity = curWeather.curCity === city,
+	                    isDayOut = +curWeather.foreWs[0].date.substr(-2) !== this._convertTime(new Date().getDate());
 
 	                if (isCurCity && !isDayOut) {
 
